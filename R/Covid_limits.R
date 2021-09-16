@@ -133,8 +133,8 @@ Covid_limits2 = function(dataset)
   # Pull Upper limit (UL) and midline (Phase_1MN) values from the last date in Phase 1
   # then put them in the fields UPPER_1 and MIDLINE_1
 
-  UL_USE = with(dataset, if_else(Day_P2 == Inf, last(UL), UL[Day_P2]))
-  MN_USE = with(dataset, if_else(Day_P2 == Inf, last(Phase_1MN), Phase_1MN[Day_P2]))
+  UL_USE = with(dataset, last(UL[Phase1]))
+  MN_USE = with(dataset, last(Phase_1MN[Phase1]))
 
   dataset %<>%
     mutate(
