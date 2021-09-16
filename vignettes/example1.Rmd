@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(shewhart.hybrid)
-```
-
 ```{r}
 #===============================================================================
 # This code:
@@ -63,7 +59,8 @@ library(googlesheets4)
 # Run the Function Code if you need to refresh it
 #===============================================================================
 
-library("shewhart.hybrid")
+# library("shewhart.hybrid")
+load_all()
 #===============================================================================
 
 # Read the data from the NY Times GitHub Site
@@ -84,8 +81,12 @@ ca = us_states %>% filter(state == "California")
 ```
 
 ```{r}
-US_limits <- with(ca,
-                  Covid_limits(state, date, deaths, new_deaths))
+
+debugonce(Covid_limits)
+US_limits <- Covid_limits(ca$state, ca$date, ca$deaths, ca$new_deaths)
+
+debugonce(Covid_limits2)
+US_limits2 = Covid_limits2(ca %>% select(date, new_deaths) %>% rename(new_events = new_deaths))
 
 usl2 = US_limits %>% filter(date <= "2021-09-10")
 all.equal(us_states$Midline...3, usl2$MIDLINEa)
@@ -96,8 +97,8 @@ all.equal(us_states$Midline...4, usl2$MIDLINEb)
 library(plotly)
 US_limits$day = 1:nrow(US_limits)
 plot_ly(
-  data = US_limits %>% filter(place == "California", date %within% interval(ymd("2021-01-01"), ymd("2021-02-01"))),
-  x = ~date, # if we use `date` you'll get artifacts in the exponential curves where dates were skipped
+  data = US_limits %>% filter(date %within% interval(ymd("2021-01-01"), ymd("2021-02-01"))),
+  x = ~day, # if we use `date` you'll get artifacts in the exponential curves where dates were skipped
   y = ~new_events,
   name = "adjusted reported deaths",
   type = "scatter",
@@ -148,14 +149,14 @@ plot_ly(
 #===============================================================================
 
 
-US_limits$Chart_Title <- paste(US_limits$place,": Unadjusted Daily Covid-19 Reported Deaths")
+# US_limits$Chart_Title <- paste(US_limits$place,": Unadjusted Daily Covid-19 Reported Deaths")
 
 US_limits$Epoch_txt <- if_else(US_limits$EPOCH == 1, "1: Pre-Growth in Daily Reported Deaths",
                                if_else(US_limits$EPOCH == 2, "2: Growth in Daily Reported Deaths",
                                        if_else(US_limits$EPOCH == 3, "3: Plateau or Descent in Daily Reported Deaths",
                                                if_else(US_limits$EPOCH == 4, "4: Stability After Descent in Daily Reported Deaths", ""))))
 
-US_limits$Sub_Title <- paste(US_limits$place, " is in Epoch ", US_limits$Epoch_txt)
+# US_limits$Sub_Title <- paste(US_limits$place, " is in Epoch ", US_limits$Epoch_txt)
 
 #===============================================================================
 # Save "US_limits to Google Sheets

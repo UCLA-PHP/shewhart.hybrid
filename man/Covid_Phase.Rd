@@ -4,32 +4,10 @@
 \alias{Covid_Phase}
 \title{Title}
 \usage{
-Covid_Phase(
-  PlaceRR,
-  place,
-  date,
-  events,
-  new_events,
-  MIDLINE_N,
-  LOWER_N,
-  UPPER_N,
-  Days_N,
-  Day_PC,
-  Date_PC,
-  EPOCH,
-  Phase_N,
-  Phase_Count,
-  MIDLINEa,
-  LOWERa,
-  UPPERa,
-  MIDLINEb,
-  LOWERb,
-  UPPERb,
-  Phase_Ch
-)
+Covid_Phase(dataset)
 }
 \arguments{
-\item{Phase_Ch}{}
+\item{dataset}{}
 }
 \value{
 

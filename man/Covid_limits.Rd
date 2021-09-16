@@ -4,10 +4,10 @@
 \alias{Covid_limits}
 \title{Title}
 \usage{
-Covid_limits(place, date, events, new_events)
+Covid_limits(dataset)
 }
 \arguments{
-\item{new_events}{}
+\item{dataset}{a data.frame or tibble with columns "date" and "new_events"; use this function one population at a time.}
 }
 \value{
 

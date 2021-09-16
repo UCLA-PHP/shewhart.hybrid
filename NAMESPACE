@@ -2,3 +2,5 @@
 
 export(Covid_Phase)
 export(Covid_limits)
+importFrom(magrittr,"%<>%")
+importFrom(magrittr,"%>%")
