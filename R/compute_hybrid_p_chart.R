@@ -5,6 +5,7 @@
 #' @return
 #' @export
 #'
+#' @importFrom dplyr mutate selectdplyr::if_else
 #' @examples
 compute_hybrid_p_chart = function(dataset)
 {
@@ -68,13 +69,13 @@ compute_hybrid_p_chart = function(dataset)
   dataset$outlier <- 1
   dataset$Dot_lag1 <- 0
   dataset$Dot_lag1 <- abs(dataset$Dot - lag(dataset$Dot))
-  dataset$Dot_lag1 <- if_else(is.na(dataset$Dot_lag1), 0, dataset$Dot_lag1)
+  dataset$Dot_lag1 <-dplyr::if_else(is.na(dataset$Dot_lag1), 0, dataset$Dot_lag1)
 
   dataset$Dot_lag2 <- 0
   dataset$Dot_lag2 <- abs(dataset$Dot - lag(dataset$Dot, 2))
-  dataset$Dot_lag2 <- if_else(is.na(dataset$Dot_lag2), 0, dataset$Dot_lag2)
+  dataset$Dot_lag2 <-dplyr::if_else(is.na(dataset$Dot_lag2), 0, dataset$Dot_lag2)
 
-  dataset$outlier <- if_else(dataset$Dot_lag1 > 0.05 & dataset$Dot_lag2 > 0.05, 0, 1)
+  dataset$outlier <-dplyr::if_else(dataset$Dot_lag1 > 0.05 & dataset$Dot_lag2 > 0.05, 0, 1)
 
   dataset$N_use <- dataset$N * dataset$outlier
   dataset$n_use <- dataset$n * dataset$outlier
@@ -127,7 +128,7 @@ compute_hybrid_p_chart = function(dataset)
 
 
     dataset$Criteria <- 0
-    dataset$Criteria <- if_else(dataset$Days_N > i & dataset$Dot_use > dataset$UL & dataset$UL > 0, 1, 0)
+    dataset$Criteria <-dplyr::if_else(dataset$Days_N > i & dataset$Dot_use > dataset$UL & dataset$UL > 0, 1, 0)
 
     dataset$SC_c <- dataset$Criteria
     dataset$SC_cx <- dataset$SC_c + lag(dataset$SC_c)
@@ -139,12 +140,12 @@ compute_hybrid_p_chart = function(dataset)
     Date_PC <- min(dataset$date[dataset$SC_cx==2]) -1
 
 
-    dataset$Phase_Ch <- if_else(Days_PC == dataset$Days_N, dataset$Dot, dataset$Phase_Ch)
+    dataset$Phase_Ch <-dplyr::if_else(Days_PC == dataset$Days_N, dataset$Dot, dataset$Phase_Ch)
     dataset$Centerline <- dataset$CL
     dataset$Upper <- dataset$UL
     dataset$Lower <- dataset$LL
 
-    dataset$PhaseCount <- if_else(dataset$Days_N >= Days_PC, 2, 1)
+    dataset$PhaseCount <-dplyr::if_else(dataset$Days_N >= Days_PC, 2, 1)
 
 
     #-------------------------------------------------------------------------------
@@ -152,7 +153,7 @@ compute_hybrid_p_chart = function(dataset)
     # otherwise keep working through the data
     #-------------------------------------------------------------------------------
 
-    j <- if_else(New_Phase, Days_Tot, as.integer(j + 1))
+    j <-dplyr::if_else(New_Phase, Days_Tot, as.integer(j + 1))
 
   }
 
@@ -202,7 +203,7 @@ compute_hybrid_p_chart = function(dataset)
     #=============================================================================
 
     dataset$Criteria <- 0
-    dataset$Criteria <- if_else(dataset$Days_N > i & dataset$Days_N <=j & dataset$Dot_use > dataset$UL & dataset$UL > 0, 1,0)
+    dataset$Criteria <-dplyr::if_else(dataset$Days_N > i & dataset$Days_N <=j & dataset$Dot_use > dataset$UL & dataset$UL > 0, 1,0)
 
     dataset$SC_c <- dataset$Criteria
     dataset$SC_cx <- dataset$SC_c + lag(dataset$SC_c)
@@ -214,23 +215,23 @@ compute_hybrid_p_chart = function(dataset)
     date_PC <- min(dataset$date[dataset$SC_cx==2]) -1
 
 
-    dataset$Phase_Ch <- if_else(Days_PC == dataset$Days_N, dataset$Dot, dataset$Phase_Ch)
+    dataset$Phase_Ch <-dplyr::if_else(Days_PC == dataset$Days_N, dataset$Dot, dataset$Phase_Ch)
 
-    dataset$Centerline <- if_else(New_Phase & dataset$Days_N >= i, dataset$CL, dataset$Centerline)
-    dataset$Centerline <- if_else(dataset$Days_N >= i & j >= Days_Tot, dataset$CL, dataset$Centerline)
+    dataset$Centerline <-dplyr::if_else(New_Phase & dataset$Days_N >= i, dataset$CL, dataset$Centerline)
+    dataset$Centerline <-dplyr::if_else(dataset$Days_N >= i & j >= Days_Tot, dataset$CL, dataset$Centerline)
 
-    dataset$Upper <- if_else(New_Phase & dataset$Days_N >= i, dataset$UL, dataset$Upper)
-    dataset$Upper <- if_else(dataset$Days_N >= i & j >= Days_Tot, dataset$UL, dataset$Upper)
-
-
-    dataset$Lower <- if_else(New_Phase & dataset$Days_N >= i, dataset$LL, dataset$Lower)
-    dataset$Lower <- if_else(dataset$Days_N >= i & j >= Days_Tot, dataset$LL, dataset$Lower)
-
-    dataset$PhaseCount <- if_else(New_Phase & dataset$Days_N >= Days_PC, dataset$PhaseCount + 1, dataset$PhaseCount)
+    dataset$Upper <-dplyr::if_else(New_Phase & dataset$Days_N >= i, dataset$UL, dataset$Upper)
+    dataset$Upper <-dplyr::if_else(dataset$Days_N >= i & j >= Days_Tot, dataset$UL, dataset$Upper)
 
 
-    j <- if_else(New_Phase, Days_PC, j + 1)
-    i <- if_else(New_Phase, Days_PC, i)
+    dataset$Lower <-dplyr::if_else(New_Phase & dataset$Days_N >= i, dataset$LL, dataset$Lower)
+    dataset$Lower <-dplyr::if_else(dataset$Days_N >= i & j >= Days_Tot, dataset$LL, dataset$Lower)
+
+    dataset$PhaseCount <-dplyr::if_else(New_Phase & dataset$Days_N >= Days_PC, dataset$PhaseCount + 1, dataset$PhaseCount)
+
+
+    j <-dplyr::if_else(New_Phase, Days_PC, j + 1)
+    i <-dplyr::if_else(New_Phase, Days_PC, i)
 
   }  # j Within Setting Loop
 
@@ -247,13 +248,13 @@ compute_hybrid_p_chart = function(dataset)
 
   dataset$LimTypeA <- ( ((dataset$PhaseCount)/2) - trunc((dataset$PhaseCount)/2) > 0)
 
-  dataset$MIDLINEa <- if_else(dataset$LimTypeA == TRUE, dataset$Centerline, -99)
-  dataset$UPPERa <- if_else(dataset$LimTypeA == TRUE, dataset$Upper, -99)
-  dataset$LOWERa <- if_else(dataset$LimTypeA == TRUE, dataset$Lower, -99)
+  dataset$MIDLINEa <-dplyr::if_else(dataset$LimTypeA == TRUE, dataset$Centerline, -99)
+  dataset$UPPERa <-dplyr::if_else(dataset$LimTypeA == TRUE, dataset$Upper, -99)
+  dataset$LOWERa <-dplyr::if_else(dataset$LimTypeA == TRUE, dataset$Lower, -99)
 
-  dataset$MIDLINEb <- if_else(dataset$LimTypeA == FALSE, dataset$Centerline, -99)
-  dataset$UPPERb <- if_else(dataset$LimTypeA == FALSE, dataset$Upper, -99)
-  dataset$LOWERb <- if_else(dataset$LimTypeA == FALSE, dataset$Lower, -99)
+  dataset$MIDLINEb <-dplyr::if_else(dataset$LimTypeA == FALSE, dataset$Centerline, -99)
+  dataset$UPPERb <-dplyr::if_else(dataset$LimTypeA == FALSE, dataset$Upper, -99)
+  dataset$LOWERb <-dplyr::if_else(dataset$LimTypeA == FALSE, dataset$Lower, -99)
 
 
   #===============================================================================
@@ -293,14 +294,14 @@ compute_hybrid_p_chart = function(dataset)
     phase_change = !is.na(Phase_Ch),
     `Observed %` = n/N,
     Midline =
-      if_else(
+     dplyr::if_else(
         is.na(MIDLINEa), MIDLINEb, MIDLINEa),
     `Upper Limit` =
-      if_else(is.na(MIDLINEa), UPPERb, UPPERa),
+     dplyr::if_else(is.na(MIDLINEa), UPPERb, UPPERa),
     `Lower Limit` =
-      if_else(is.na(MIDLINEa), LOWERb, LOWERa),
+     dplyr::if_else(is.na(MIDLINEa), LOWERb, LOWERa),
     `Lower Limit` =
-      if_else(`Lower Limit` < 0, 0, `Lower Limit`)
+     dplyr::if_else(`Lower Limit` < 0, 0, `Lower Limit`)
   )
 
   #-------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 \alias{plot_p_chart}
 \title{Title}
 \usage{
-plot_p_chart(data, title = "")
+plot_p_chart(data, title = "", mode1 = "lines")
 }
 \arguments{
 \item{title}{}
