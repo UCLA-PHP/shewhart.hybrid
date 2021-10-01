@@ -300,7 +300,7 @@ compute_hybrid_p_chart = function(dataset)
     `Lower Limit` =
       if_else(is.na(MIDLINEa), LOWERb, LOWERa),
     `Lower Limit` =
-      if_else(`Lower Limit` < 0, NA_real_, `Lower Limit`)
+      if_else(`Lower Limit` < 0, 0, `Lower Limit`)
   )
 
   #-------------------------------------------------------------------------------
