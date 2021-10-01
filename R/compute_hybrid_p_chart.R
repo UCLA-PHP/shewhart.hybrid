@@ -5,7 +5,7 @@
 #' @return
 #' @export
 #'
-#' @importFrom dplyr mutate select if_else
+#' @importFrom dplyr mutate select if_else lag
 #' @examples
 compute_hybrid_p_chart = function(dataset)
 {
@@ -68,11 +68,11 @@ compute_hybrid_p_chart = function(dataset)
 
   dataset$outlier <- 1
   dataset$Dot_lag1 <- 0
-  dataset$Dot_lag1 <- abs(dataset$Dot - lag(dataset$Dot))
+  dataset$Dot_lag1 <- abs(dataset$Dot - dplyr::lag(dataset$Dot))
   dataset$Dot_lag1 <-dplyr::if_else(is.na(dataset$Dot_lag1), 0, dataset$Dot_lag1)
 
   dataset$Dot_lag2 <- 0
-  dataset$Dot_lag2 <- abs(dataset$Dot - lag(dataset$Dot, 2))
+  dataset$Dot_lag2 <- abs(dataset$Dot - dplyr::lag(dataset$Dot, 2))
   dataset$Dot_lag2 <-dplyr::if_else(is.na(dataset$Dot_lag2), 0, dataset$Dot_lag2)
 
   dataset$outlier <-dplyr::if_else(dataset$Dot_lag1 > 0.05 & dataset$Dot_lag2 > 0.05, 0, 1)
@@ -131,7 +131,7 @@ compute_hybrid_p_chart = function(dataset)
     dataset$Criteria <-dplyr::if_else(dataset$Days_N > i & dataset$Dot_use > dataset$UL & dataset$UL > 0, 1, 0)
 
     dataset$SC_c <- dataset$Criteria
-    dataset$SC_cx <- dataset$SC_c + lag(dataset$SC_c)
+    dataset$SC_cx <- dataset$SC_c + dplyr::lag(dataset$SC_c)
     dataset$SC_cx[is.na(dataset$SC_cx)] <- 0
 
     New_Phase <- (max(dataset$SC_cx) == 2)
@@ -206,7 +206,7 @@ compute_hybrid_p_chart = function(dataset)
     dataset$Criteria <-dplyr::if_else(dataset$Days_N > i & dataset$Days_N <=j & dataset$Dot_use > dataset$UL & dataset$UL > 0, 1,0)
 
     dataset$SC_c <- dataset$Criteria
-    dataset$SC_cx <- dataset$SC_c + lag(dataset$SC_c)
+    dataset$SC_cx <- dataset$SC_c + dplyr::lag(dataset$SC_c)
     dataset$SC_cx[is.na(dataset$SC_cx)] <- 0
 
     New_Phase <- (max(dataset$SC_cx) == 2)
