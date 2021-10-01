@@ -12,7 +12,8 @@ plot_p_chart = function(data)
 {
 
   plotly::plot_ly(
-    data = data %>% dplyr::group_by(EPOCH),
+    data,
+    # data = data %>% dplyr::group_by(EPOCH),
     x = ~date,
     y = ~`Observed %` * 100,
     name = "Observed %",
@@ -21,6 +22,7 @@ plot_p_chart = function(data)
     mode = "lines+markers"
   ) %>%
     plotly::add_lines(
+      data = data %>% dplyr::group_by(EPOCH),
       name = "Midline",
       y = ~Midline * 100,
       color = I("red"),
