@@ -1,6 +1,7 @@
 #' Title
 #'
-#' @param chart_data
+#' @param data
+#' @param title
 #'
 #' @return
 #' @export
@@ -8,7 +9,7 @@
 #'
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
-plot_p_chart = function(data)
+plot_p_chart = function(data, title = "")
 {
 
   plotly::plot_ly(
@@ -50,6 +51,7 @@ plot_p_chart = function(data)
       y = ~Phase_Ch *100
     ) %>%
     plotly::layout(
+      title = title,
       yaxis = list(title = 'Positivity rate (%)',
                    rangemode = "tozero"),
       xaxis = list(title = NA),

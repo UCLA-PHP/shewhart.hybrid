@@ -4,10 +4,10 @@
 \alias{plot_p_chart}
 \title{Title}
 \usage{
-plot_p_chart(data)
+plot_p_chart(data, title = "")
 }
 \arguments{
-\item{chart_data}{}
+\item{title}{}
 }
 \value{
 
