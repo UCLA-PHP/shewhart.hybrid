@@ -82,30 +82,25 @@ ca = us_states %>% filter(state == "California")
 
 ```{r}
 
-debugonce(Covid_limits)
 US_limits <- Covid_limits(ca$state, ca$date, ca$deaths, ca$new_deaths)
 
-debugonce(Covid_limits2)
 US_limits2 = Covid_limits2(ca %>% select(date, new_deaths) %>% rename(new_events = new_deaths))
 
-usl2 = US_limits %>% filter(date <= "2021-09-10")
-all.equal(us_states$Midline...3, usl2$MIDLINEa)
-all.equal(us_states$Midline...4, usl2$MIDLINEb)
 ```
 
 ```{r}
 library(plotly)
 US_limits$day = 1:nrow(US_limits)
 plot_ly(
-  data = US_limits %>% filter(date %within% interval(ymd("2021-01-01"), ymd("2021-02-01"))),
-  x = ~day, # if we use `date` you'll get artifacts in the exponential curves where dates were skipped
+  data = US_limits2,  #%>% filter(date %within% interval(ymd("2021-01-01"), ymd("2021-02-01"))),
+  x = ~date, # if we use `date` you'll get artifacts in the exponential curves where dates were skipped
   y = ~new_events,
   name = "adjusted reported deaths",
   type = "scatter",
   mode = "lines+markers") %>%
-   layout(
-     yaxis = list(range = list(0, 1500))
-   ) %>%
+  layout(
+    yaxis = list(range = list(0, 1500))
+  ) %>%
   add_trace(
     y = ~MIDLINEa,
     name = "Midline a",
