@@ -5,7 +5,7 @@
 #' @return
 #' @export
 #'
-#' @importFrom dplyr mutate select if_else lag
+#' @importFrom dplyr mutate select if_else lag na_if
 #' @examples
 compute_hybrid_p_chart = function(dataset)
 {
@@ -236,7 +236,7 @@ compute_hybrid_p_chart = function(dataset)
   }  # j Within Setting Loop
 
 
-  dataset$Phase_Ch <- na_if(dataset$Phase_Ch, -99.0)
+  dataset$Phase_Ch <- dplyr::na_if(dataset$Phase_Ch, -99.0)
 
   #===============================================================================
   #   Store the limits in one of two sets of fields (ending a or b)
@@ -277,20 +277,20 @@ compute_hybrid_p_chart = function(dataset)
            Y_Max, Phase_Ch, EPOCH, N, n)
 
 
-  dataset$MIDLINEa <- na_if(dataset$MIDLINEa, -99)
-  dataset$MIDLINEb <- na_if(dataset$MIDLINEb, -99)
+  dataset$MIDLINEa <- dplyr::na_if(dataset$MIDLINEa, -99)
+  dataset$MIDLINEb <- dplyr::na_if(dataset$MIDLINEb, -99)
 
-  dataset$UPPERa <- na_if(dataset$UPPERa, -99)
-  dataset$UPPERb <- na_if(dataset$UPPERb, -99)
+  dataset$UPPERa <- dplyr::na_if(dataset$UPPERa, -99)
+  dataset$UPPERb <- dplyr::na_if(dataset$UPPERb, -99)
 
-  dataset$LOWERa <- na_if(dataset$LOWERa, -99)
-  dataset$LOWERb <- na_if(dataset$LOWERb, -99)
+  dataset$LOWERa <- dplyr::na_if(dataset$LOWERa, -99)
+  dataset$LOWERb <- dplyr::na_if(dataset$LOWERb, -99)
 
-  dataset$new_events <- na_if(dataset$new_events, -9)
+  dataset$new_events <- dplyr::na_if(dataset$new_events, -9)
 
-  dataset$Phase_Ch <- na_if(dataset$Phase_Ch, -99.0)
+  dataset$Phase_Ch <- dplyr::na_if(dataset$Phase_Ch, -99.0)
 
-  dataset %<>% mutate(
+  dataset %<>% dplyr::mutate(
     phase_change = !is.na(Phase_Ch),
     `Observed %` = n/N,
     Midline =
