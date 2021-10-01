@@ -9,7 +9,7 @@
 #'
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
-plot_p_chart = function(data, title = "")
+plot_p_chart = function(data, title = "", mode1 = "lines")
 {
 
   plotly::plot_ly(
@@ -22,21 +22,24 @@ plot_p_chart = function(data, title = "")
     # color = ~factor(EPOCH),
     mode = "lines+markers"
   ) %>%
-    plotly::add_lines(
+    plotly::add_trace(
+      mode = mode1,
       data = data %>% dplyr::group_by(EPOCH),
       name = "Midline",
       y = ~Midline * 100,
       color = I("red"),
       line = list(width = 1)
     ) %>%
-    plotly::add_lines(
+    plotly::add_trace(
+      mode = mode1,
       y = ~`Lower Limit` * 100,
       name = "Lower Limit",
       color = I("gray"),
       line = list(width = 2)
 
     ) %>%
-    plotly::add_lines(
+    plotly::add_trace(
+      mode = mode1,
       y = ~`Upper Limit` * 100,
       name = "Upper Limit",
       color = I("gray"),
