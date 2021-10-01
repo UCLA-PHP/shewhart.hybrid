@@ -46,7 +46,7 @@ plot_p_chart = function(data, title = "", mode1 = "lines")
       line = list(width = 2)
     ) %>%
     plotly::add_markers(
-      # data %>% dplyr::filter(phase_change),
+      # data %>% dplyr::filter(phase_change) %>% dplyr::group_by(EPOCH),
       name = "Start of Epoch",
       color = I("orange"),
       x = ~ date,
