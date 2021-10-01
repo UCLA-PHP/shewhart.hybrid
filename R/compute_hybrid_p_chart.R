@@ -5,7 +5,7 @@
 #' @return
 #' @export
 #'
-#' @importFrom dplyr mutate selectdplyr::if_else
+#' @importFrom dplyr mutate select if_else
 #' @examples
 compute_hybrid_p_chart = function(dataset)
 {
