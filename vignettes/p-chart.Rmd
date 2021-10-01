@@ -89,11 +89,10 @@ for (k in 1:Place_END) {
 ```{r}
 
 library(plotly)
-plot_p_chart(
-  data = OutputData %>% dplyr::filter(place == "12-14"))
+temp = OutputData %>% dplyr::filter(place == "12-14")
+plot_p_chart(data = temp)
 
 ```
-
 
 ```{r}
 

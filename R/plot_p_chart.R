@@ -17,7 +17,7 @@ plot_p_chart = function(data)
     y = ~`Observed %` * 100,
     name = "Observed %",
     type = "scatter",
-    # color = ~factor(is.na(Phase_Ch)),
+    # color = ~factor(EPOCH),
     mode = "lines+markers"
   ) %>%
     plotly::add_lines(
@@ -39,8 +39,17 @@ plot_p_chart = function(data)
       color = I("gray"),
       line = list(width = 2)
     ) %>%
+    plotly::add_markers(
+      # data %>% dplyr::filter(phase_change),
+      name = "Start of Epoch",
+      color = I("orange"),
+      x = ~ date,
+      # y = ~`Observed %` * 100
+      y = ~Phase_Ch *100
+    ) %>%
     plotly::layout(
-      yaxis = list(title = 'Positivity rate (%)'),
+      yaxis = list(title = 'Positivity rate (%)',
+                   rangemode = "tozero"),
       xaxis = list(title = NA),
       legend = list(orientation = 'h')
     )
