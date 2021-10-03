@@ -9,6 +9,7 @@
 
 summarize_p_chart = function(
   data,
+  place_vars = "place",
   reference_date = max(data$date))
 {
 
@@ -20,7 +21,7 @@ summarize_p_chart = function(
   ################################################################################
 
   Summ_Tab <- data %>%
-    group_by(place, EPOCH) %>%
+    group_by(across(all_of(place_vars)), EPOCH) %>%
     summarise(
       MIDLINEa = last(MIDLINEa),
       MIDLINEb = last(MIDLINEb),
@@ -28,7 +29,7 @@ summarize_p_chart = function(
 
 
   Summ_Tab2 <- Summ_Tab %>%
-    group_by(place) %>%
+    group_by(across(all_of(place_vars))) %>%
     mutate(EPOCH_max = max(EPOCH)) %>%
     filter(EPOCH == EPOCH_max | EPOCH == EPOCH_max - 1)
 
@@ -37,7 +38,7 @@ summarize_p_chart = function(
   Summ_Tab2$MIDLINE <- Summ_Tab2$MIDLINEa + Summ_Tab2$MIDLINEb
 
   Summ_Tab3 <- Summ_Tab2 %>%
-    group_by(place) %>%
+    group_by(across(all_of(place_vars))) %>%
     summarise(MIDLINE_0 = first(MIDLINE), date_0 = first(date), MIDLINE_1 = last(MIDLINE), date_1 = last(date) )
 
 
