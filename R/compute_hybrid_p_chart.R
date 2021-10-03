@@ -271,7 +271,7 @@ compute_hybrid_p_chart = function(dataset)
   #===============================================================================
 
   dataset %<>%
-    select(date, place, new_events,
+    select(date, new_events,
            MIDLINEa, UPPERa, LOWERa,
            MIDLINEb, UPPERb, LOWERb,
            Y_Max, Phase_Ch, EPOCH, N, n)
@@ -303,17 +303,6 @@ compute_hybrid_p_chart = function(dataset)
     `Lower Limit` =
      dplyr::if_else(`Lower Limit` < 0, 0, `Lower Limit`)
   )
-
-  #-------------------------------------------------------------------------------
-  #   Create fields containing the Chart Title, and Sub-Title for use in
-  #   Google Studio
-  #-------------------------------------------------------------------------------
-
-  dataset$Chart_Title <- paste(dataset$place,": Daily Covid-19 Percent Positive Tests")
-
-  dataset$Epoch_txt <- dataset$EPOCH
-
-  dataset$Sub_Title <- paste(dataset$place, " is in Phase ", dataset$Epoch_txt)
 
 
   return(dataset)
