@@ -47,23 +47,23 @@ summarize_p_chart = function(
 
   Summ_Tab3$Feedback <- "Blank"
   Summ_Tab3$Feedback <- if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
-                                paste("RED: Increased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
+                                paste(sep = "", "RED: Increased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
                                 Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
-                                paste("GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
+                                paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
                                 Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
-                                paste("GREEN: Decreased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
+                                paste(sep = "", "GREEN: Decreased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
                                 Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
-                                paste("GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
+                                paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
                                 Summ_Tab3$Feedback)
 
 
-  Summ_Tab3$Feedback <- paste("Since ", Summ_Tab3$date_1, " ", Summ_Tab3$place, " has percent positive cases varying around a mid line of ", round(Summ_Tab3$MIDLINE_1, 3) )
+  Summ_Tab3$Feedback <- paste(sep = "", "Since ", Summ_Tab3$date_1, " ", Summ_Tab3$place, " has percent positive cases varying around a mid line of ", round(Summ_Tab3$MIDLINE_1, 3) )
 
   return(Summ_Tab3)
 

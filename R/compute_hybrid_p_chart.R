@@ -76,9 +76,9 @@ compute_hybrid_p_chart = function(dataset)
 
   dataset$Dot_lag2 = 0
   dataset$Dot_lag2 = abs(dataset$Dot - dplyr::lag(dataset$Dot, 2))
-  dataset$Dot_lag2 =dplyr::if_else(is.na(dataset$Dot_lag2), 0, dataset$Dot_lag2)
+  dataset$Dot_lag2 = dplyr::if_else(is.na(dataset$Dot_lag2), 0, dataset$Dot_lag2)
 
-  dataset$outlier =dplyr::if_else(dataset$Dot_lag1 > 0.05 & dataset$Dot_lag2 > 0.05, 0, 1)
+  dataset$outlier = dplyr::if_else(dataset$Dot_lag1 > 0.05 & dataset$Dot_lag2 > 0.05, 0, 1)
 
   dataset$N_use = dataset$N * dataset$outlier
   dataset$n_use = dataset$n * dataset$outlier
