@@ -4,10 +4,10 @@
 \alias{summarize_p_chart}
 \title{Title}
 \usage{
-summarize_p_chart(data)
+summarize_p_chart(data, reference_date = max(data$date))
 }
 \arguments{
-\item{data}{}
+\item{reference_date}{}
 }
 \value{
 

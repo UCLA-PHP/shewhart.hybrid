@@ -1,12 +1,15 @@
 #' Title
 #'
 #' @param data
+#' @param reference_date
 #'
 #' @return
 #' @export
 #'
 
-summarize_p_chart = function(data)
+summarize_p_chart = function(
+  data,
+  reference_date = max(data$date))
 {
 
   ################################################################################
@@ -18,7 +21,10 @@ summarize_p_chart = function(data)
 
   Summ_Tab <- data %>%
     group_by(place, EPOCH) %>%
-    summarise(MIDLINEa = last(MIDLINEa), MIDLINEb = last(MIDLINEb), date = min(date) )
+    summarise(
+      MIDLINEa = last(MIDLINEa),
+      MIDLINEb = last(MIDLINEb),
+      date = min(date) )
 
 
   Summ_Tab2 <- Summ_Tab %>%
@@ -35,7 +41,7 @@ summarize_p_chart = function(data)
     summarise(MIDLINE_0 = first(MIDLINE), date_0 = first(date), MIDLINE_1 = last(MIDLINE), date_1 = last(date) )
 
 
-  Summ_Tab3$datex <- ymd("2020-12-05")
+  Summ_Tab3$datex <- reference_date
   Summ_Tab3$days <- Summ_Tab3$datex - Summ_Tab3$date_1
 
 
