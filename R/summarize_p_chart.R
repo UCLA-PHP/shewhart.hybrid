@@ -63,7 +63,9 @@ summarize_p_chart = function(
                                 Summ_Tab3$Feedback)
 
 
-  Summ_Tab3$Feedback <- paste(sep = "", "Since ", Summ_Tab3$date_1, " ", Summ_Tab3$place, " has percent positive cases varying around a mid line of ", round(Summ_Tab3$MIDLINE_1, 3) )
+  Summ_Tab3$Feedback <- paste(sep = "", "Since ", Summ_Tab3$date_1, ", ",
+                              # Summ_Tab3$place,
+                              "percent positive cases has been varying around a mid line of ", round(Summ_Tab3$MIDLINE_1, 3) )
 
   return(Summ_Tab3)
 
