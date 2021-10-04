@@ -82,7 +82,7 @@ summarize_p_chart = function(
     dplyr::select(-datex) %>%
     dplyr::rename(
       `previous midline` = MIDLINE_0,
-      `current midline` = MIDLINE_0,
+      `current midline` = MIDLINE_1,
       `start of prev. epoch` = date_0,
       `start of cur. epoch` = date_1,
       `days since cur. epoch start` = days
