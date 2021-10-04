@@ -44,7 +44,12 @@ summarize_p_chart = function(
 
   Summ_Tab3 <- Summ_Tab2 %>%
     dplyr::group_by(dplyr::across(dplyr::all_of(place_vars))) %>%
-    dplyr::summarise(MIDLINE_0 = dplyr::first(MIDLINE), date_0 = dplyr::first(date), MIDLINE_1 = dplyr::last(MIDLINE), date_1 = dplyr::last(date) )
+    dplyr::summarise(
+      MIDLINE_0 = dplyr::first(MIDLINE),
+      date_0 = dplyr::first(date),
+      MIDLINE_1 = dplyr::last(MIDLINE),
+      date_1 = dplyr::last(date)
+    )
 
 
   Summ_Tab3$datex <- reference_date
@@ -72,6 +77,16 @@ summarize_p_chart = function(
   Summ_Tab3$Feedback <- paste(sep = "", "Since ", Summ_Tab3$date_1, ", ",
                               # Summ_Tab3$place,
                               "percent positive cases has been varying around a mid line of ", round(Summ_Tab3$MIDLINE_1, 3) )
+
+  Summ_Tab3 %<>%
+    select(-datex) %>%
+    rename(
+      `previous midline` = MIDLINE_0,
+      `current midline` = MIDLINE_0,
+      `start of prev. epoch` = date_0,
+      `start of cur. epoch` = date_1,
+      `days since cur. epoch start` = days
+    )
 
   return(Summ_Tab3)
 
