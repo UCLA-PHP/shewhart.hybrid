@@ -45,9 +45,9 @@ summarize_p_chart = function(
   Summ_Tab3 <- Summ_Tab2 %>%
     dplyr::group_by(dplyr::across(dplyr::all_of(place_vars))) %>%
     dplyr::summarise(
-      MIDLINE_0 = dplyr::first(MIDLINE) * 100,
+      MIDLINE_0 = dplyr::first(MIDLINE),
       date_0 = dplyr::first(date),
-      MIDLINE_1 = dplyr::last(MIDLINE) * 100,
+      MIDLINE_1 = dplyr::last(MIDLINE),
       date_1 = dplyr::last(date)
     )
 
@@ -58,25 +58,25 @@ summarize_p_chart = function(
 
   Summ_Tab3$Feedback <- "Blank"
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
-                                       paste(sep = "", "RED: Increased to ", round(Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
+                                       paste(sep = "", "RED: Increased to ", 100*round(Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
                                        Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
-                                       paste(sep = "", "GRAY: Has been at ", round(Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
+                                       paste(sep = "", "GRAY: Has been at ", 100*round(Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
                                        Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
-                                       paste(sep = "", "GREEN: Decreased to ", round(Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
+                                       paste(sep = "", "GREEN: Decreased to ", 100*round(Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
                                        Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
-                                       paste(sep = "", "GRAY: Has been at ", round(Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
+                                       paste(sep = "", "GRAY: Has been at ", 100*round(Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
                                        Summ_Tab3$Feedback)
 
 
   Summ_Tab3$Feedback <- paste(sep = "", "Since ", Summ_Tab3$date_1, ", ",
                               # Summ_Tab3$place,
-                              "the test positivity rate has been varying around a mid line of ", round(Summ_Tab3$MIDLINE_1, 3), "%" )
+                              "the test positivity rate has been varying around a mid line of ", 100*round(Summ_Tab3$MIDLINE_1, 3), "%" )
 
   Summ_Tab3 %<>%
     dplyr::select(-datex) %>%
