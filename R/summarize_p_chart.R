@@ -81,11 +81,11 @@ summarize_p_chart = function(
   Summ_Tab3 %<>%
     dplyr::select(-datex) %>%
     dplyr::rename(
-      `previous midline` = MIDLINE_0,
-      `current midline` = MIDLINE_1,
-      `start of prev. epoch` = date_0,
-      `start of cur. epoch` = date_1,
-      `days since cur. epoch start` = days
+      `Previous midline` = MIDLINE_0,
+      `Current midline` = MIDLINE_1,
+      `Start of prev. epoch` = date_0,
+      `Start of cur. epoch` = date_1,
+      `Days since cur. epoch start` = days
     )
 
   return(Summ_Tab3)
