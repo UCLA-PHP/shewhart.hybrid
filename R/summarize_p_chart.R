@@ -35,7 +35,7 @@ summarize_p_chart = function(
     dplyr::mutate(EPOCH_max = max(EPOCH)) %>%
     dplyr::filter(EPOCH == EPOCH_max | EPOCH == EPOCH_max - 1)
 
-Summ_Tab2 %<>%
+  Summ_Tab2 %<>%
     dplyr::mutate(
       dplyr::across(where(is.numeric), tidyr::replace_na, replace = 0)
     )
@@ -53,20 +53,20 @@ Summ_Tab2 %<>%
 
   Summ_Tab3$Feedback <- "Blank"
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
-                                paste(sep = "", "RED: Increased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
-                                Summ_Tab3$Feedback)
+                                       paste(sep = "", "RED: Increased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
+                                       Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
-                                paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
-                                Summ_Tab3$Feedback)
+                                       paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
+                                       Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
-                                paste(sep = "", "GREEN: Decreased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
-                                Summ_Tab3$Feedback)
+                                       paste(sep = "", "GREEN: Decreased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
+                                       Summ_Tab3$Feedback)
 
   Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
-                                paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
-                                Summ_Tab3$Feedback)
+                                       paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
+                                       Summ_Tab3$Feedback)
 
 
   Summ_Tab3$Feedback <- paste(sep = "", "Since ", Summ_Tab3$date_1, ", ",
