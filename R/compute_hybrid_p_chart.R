@@ -274,10 +274,10 @@ compute_hybrid_p_chart = function(dataset)
   #===============================================================================
 
   dataset %<>%
-    select(date, new_events,
-           MIDLINEa, UPPERa, LOWERa,
-           MIDLINEb, UPPERb, LOWERb,
-           Y_Max, Phase_Ch, EPOCH, N, n)
+    select(any_of(c("date", "place", "new_events",
+           "MIDLINEa", "UPPERa", "LOWERa",
+           "MIDLINEb", "UPPERb", "LOWERb",
+           "Y_Max", "Phase_Ch", "EPOCH", "N", "n")))
 
 
   dataset$MIDLINEa = dplyr::na_if(dataset$MIDLINEa, -99)

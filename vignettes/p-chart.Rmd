@@ -74,10 +74,10 @@ OutputData = NULL
 
 k=1
 for (k in 1:Place_END) {
-  
   Statei = 
     filter(Pchart_Data, StateRR == k) %>%
     compute_hybrid_p_chart()
+    
   
   OutputData %<>% bind_rows(Statei)
   
