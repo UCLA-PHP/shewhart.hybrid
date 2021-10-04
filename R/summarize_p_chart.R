@@ -7,7 +7,7 @@
 #' @export
 #'
 
-#' @importFrom dplyr group_by across all_of summarise last mutate filter first if_else
+#' @importFrom dplyr group_by across all_of summarise last mutate filter first if_else rename
 #' @importFrom tidyr replace_na
 summarize_p_chart = function(
   data,
@@ -79,8 +79,8 @@ summarize_p_chart = function(
                               "percent positive cases has been varying around a mid line of ", round(Summ_Tab3$MIDLINE_1, 3) )
 
   Summ_Tab3 %<>%
-    select(-datex) %>%
-    rename(
+    dplyr::select(-datex) %>%
+    dplyr::rename(
       `previous midline` = MIDLINE_0,
       `current midline` = MIDLINE_0,
       `start of prev. epoch` = date_0,
