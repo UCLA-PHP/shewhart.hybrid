@@ -7,6 +7,8 @@
 #' @export
 #'
 
+#' @importFrom dplyr group_by across all_of summarise last mutate filter first if_else
+#' @importFrom tidyr replace_na
 summarize_p_chart = function(
   data,
   place_vars = "place",
@@ -21,25 +23,28 @@ summarize_p_chart = function(
   ################################################################################
 
   Summ_Tab <- data %>%
-    group_by(across(all_of(place_vars)), EPOCH) %>%
-    summarise(
-      MIDLINEa = last(MIDLINEa),
-      MIDLINEb = last(MIDLINEb),
+    dplyr::group_by(dplyr::across(dplyr::all_of(place_vars)), EPOCH) %>%
+    dplyr::summarise(
+      MIDLINEa = dplyr::last(MIDLINEa),
+      MIDLINEb = dplyr::last(MIDLINEb),
       date = min(date) )
 
 
   Summ_Tab2 <- Summ_Tab %>%
-    group_by(across(all_of(place_vars))) %>%
-    mutate(EPOCH_max = max(EPOCH)) %>%
-    filter(EPOCH == EPOCH_max | EPOCH == EPOCH_max - 1)
+    dplyr::group_by(dplyr::across(dplyr::all_of(place_vars))) %>%
+    dplyr::mutate(EPOCH_max = max(EPOCH)) %>%
+    dplyr::filter(EPOCH == EPOCH_max | EPOCH == EPOCH_max - 1)
 
+Summ_Tab2 %<>%
+    dplyr::mutate(
+      dplyr::across(where(is.numeric), tidyr::replace_na, replace = 0)
+    )
 
-  Summ_Tab2[is.na(Summ_Tab2)] <- 0
   Summ_Tab2$MIDLINE <- Summ_Tab2$MIDLINEa + Summ_Tab2$MIDLINEb
 
   Summ_Tab3 <- Summ_Tab2 %>%
-    group_by(across(all_of(place_vars))) %>%
-    summarise(MIDLINE_0 = first(MIDLINE), date_0 = first(date), MIDLINE_1 = last(MIDLINE), date_1 = last(date) )
+    dplyr::group_by(dplyr::across(dplyr::all_of(place_vars))) %>%
+    dplyr::summarise(MIDLINE_0 = dplyr::first(MIDLINE), date_0 = dplyr::first(date), MIDLINE_1 = dplyr::last(MIDLINE), date_1 = dplyr::last(date) )
 
 
   Summ_Tab3$datex <- reference_date
@@ -47,19 +52,19 @@ summarize_p_chart = function(
 
 
   Summ_Tab3$Feedback <- "Blank"
-  Summ_Tab3$Feedback <- if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
+  Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
                                 paste(sep = "", "RED: Increased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
                                 Summ_Tab3$Feedback)
 
-  Summ_Tab3$Feedback <- if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
+  Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 > Summ_Tab3$MIDLINE_0,
                                 paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
                                 Summ_Tab3$Feedback)
 
-  Summ_Tab3$Feedback <- if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
+  Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days <= 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
                                 paste(sep = "", "GREEN: Decreased to ", round(100*Summ_Tab3$MIDLINE_1, 2), "%, ", Summ_Tab3$days, " days ago" ),
                                 Summ_Tab3$Feedback)
 
-  Summ_Tab3$Feedback <- if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
+  Summ_Tab3$Feedback <- dplyr::if_else(Summ_Tab3$days > 7 & Summ_Tab3$MIDLINE_1 <= Summ_Tab3$MIDLINE_0,
                                 paste(sep = "", "GRAY: Has been at ", round(100*Summ_Tab3$MIDLINE_1, 2), "% for ", Summ_Tab3$days, " days" ),
                                 Summ_Tab3$Feedback)
 
