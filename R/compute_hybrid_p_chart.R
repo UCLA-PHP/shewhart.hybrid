@@ -275,9 +275,9 @@ compute_hybrid_p_chart = function(dataset)
 
   dataset %<>%
     select(any_of(c("date", "place", "new_events",
-           "MIDLINEa", "UPPERa", "LOWERa",
-           "MIDLINEb", "UPPERb", "LOWERb",
-           "Y_Max", "Phase_Ch", "EPOCH", "N", "n")))
+                    "MIDLINEa", "UPPERa", "LOWERa",
+                    "MIDLINEb", "UPPERb", "LOWERb",
+                    "Y_Max", "Phase_Ch", "EPOCH", "N", "n")))
 
 
   dataset$MIDLINEa = dplyr::na_if(dataset$MIDLINEa, -99)
@@ -297,15 +297,21 @@ compute_hybrid_p_chart = function(dataset)
     phase_change = !is.na(Phase_Ch),
     `Observed %` = n/N,
     Midline =
-     dplyr::if_else(
+      dplyr::if_else(
         is.na(MIDLINEa), MIDLINEb, MIDLINEa),
     `Upper Limit` =
-     dplyr::if_else(is.na(MIDLINEa), UPPERb, UPPERa),
+      dplyr::if_else(is.na(MIDLINEa), UPPERb, UPPERa),
     `Lower Limit` =
-     dplyr::if_else(is.na(MIDLINEa), LOWERb, LOWERa),
+      dplyr::if_else(is.na(MIDLINEa), LOWERb, LOWERa),
     `Lower Limit` =
-     dplyr::if_else(`Lower Limit` < 0, 0, `Lower Limit`)
+      dplyr::if_else(`Lower Limit` < 0, 0, `Lower Limit`),
+
+    label = paste0(
+      "# positive tests: ", n,
+      "\n# tests: ", N,
+      "\nPositivity rate: ",round(`Observed %`*100, 2), "%")
   )
+
 
 
   return(dataset)

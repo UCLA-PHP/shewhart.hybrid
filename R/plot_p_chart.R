@@ -9,7 +9,7 @@
 #'
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
-plot_p_chart = function(data, title = "", mode1 = "lines")
+plot_p_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100))
 {
 
   plotly::plot_ly(
@@ -20,18 +20,32 @@ plot_p_chart = function(data, title = "", mode1 = "lines")
     name = "Observed %",
     type = "scatter",
     # color = ~factor(EPOCH),
-    mode = "lines+markers"
+    mode = "lines+markers",
+    text = ~label,
+    size = ~N,
+    sizes = sizes,
+    marker = list(
+      # opacity = 0.7,
+      sizemode = "area"
+    )
+
   ) %>%
     plotly::add_trace(
       mode = mode1,
       data = data %>% dplyr::group_by(EPOCH),
       name = "Midline",
       y = ~Midline * 100,
+      size = NULL,
+      text = NULL,
+      marker = NULL,
       color = I("red"),
       line = list(width = 1)
     ) %>%
     plotly::add_trace(
       mode = mode1,
+      size = NULL,
+      text = NULL,
+      marker = NULL,
       y = ~`Lower Limit` * 100,
       name = "Lower Limit",
       color = I("gray"),
@@ -40,6 +54,9 @@ plot_p_chart = function(data, title = "", mode1 = "lines")
     ) %>%
     plotly::add_trace(
       mode = mode1,
+      size = NULL,
+      text = NULL,
+      marker = NULL,
       y = ~`Upper Limit` * 100,
       name = "Upper Limit",
       color = I("gray"),
@@ -51,7 +68,13 @@ plot_p_chart = function(data, title = "", mode1 = "lines")
       color = I("orange"),
       x = ~ date,
       # y = ~`Observed %` * 100
-      y = ~Phase_Ch *100
+      y = ~Phase_Ch *100,
+      size = ~N,
+      sizes = sizes,
+      marker = list(
+        # opacity = 0.7,
+        sizemode = "area"
+      )
     ) %>%
     plotly::layout(
       title = title,
