@@ -2,6 +2,10 @@
 
 export(Covid_Phase2)
 export(Covid_limits2)
+export(P_Chart)
+export(P_Chart_Funnel)
+export(P_Prime)
+export(P_Prime_Funnel)
 export(compute_hybrid_p_chart)
 export(plot_p_chart)
 export(summarize_p_chart)
