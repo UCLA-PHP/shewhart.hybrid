@@ -12,7 +12,8 @@
 summarize_p_chart = function(
   data,
   place_vars = "place",
-  reference_date = max(data$date))
+  reference_date = max(data$date),
+  digits = 4)
 {
 
   ################################################################################
@@ -76,7 +77,7 @@ summarize_p_chart = function(
 
   Summ_Tab3$Feedback <- paste(sep = "", "Since ", Summ_Tab3$date_1, ", ",
                               # Summ_Tab3$place,
-                              "the test positivity rate has been varying around a mid line of ", 100*round(Summ_Tab3$MIDLINE_1, 3), "%" )
+                              "the test positivity rate has been varying around a mid line of ", 100*round(Summ_Tab3$MIDLINE_1, digits), "%" )
 
   Summ_Tab3 %<>%
     dplyr::select(-datex) %>%

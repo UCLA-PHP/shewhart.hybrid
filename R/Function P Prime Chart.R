@@ -230,6 +230,7 @@ P_Prime <- function(Pchart_Data) {
     Pchart_Data$Dot <- na_if(Pchart_Data$Dot, -9)
     Pchart_Data$Phase_Ch <- na_if(Pchart_Data$Phase_Ch, -99.0)
 
+    Pchart_Data %<>% rename(new_events = Dot) %>% postprocess()
 
   return(Pchart_Data)
 

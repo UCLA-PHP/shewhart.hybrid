@@ -265,8 +265,6 @@ compute_hybrid_p_chart = function(dataset)
   # in Google Studio
   #===============================================================================
 
-  dataset$Y_Max = 0.15
-  dataset$EPOCH = dataset$PhaseCount
   dataset$new_events = dataset$Dot
 
   #===============================================================================
@@ -277,7 +275,7 @@ compute_hybrid_p_chart = function(dataset)
     select(any_of(c("date", "place", "new_events",
                     "MIDLINEa", "UPPERa", "LOWERa",
                     "MIDLINEb", "UPPERb", "LOWERb",
-                    "Y_Max", "Phase_Ch", "EPOCH", "N", "n")))
+                    "Phase_Ch", "PhaseCount", "N", "n")))
 
 
   dataset$MIDLINEa = dplyr::na_if(dataset$MIDLINEa, -99)
@@ -293,24 +291,7 @@ compute_hybrid_p_chart = function(dataset)
 
   dataset$Phase_Ch = dplyr::na_if(dataset$Phase_Ch, -99.0)
 
-  dataset %<>% dplyr::mutate(
-    phase_change = !is.na(Phase_Ch),
-    `Observed %` = n/N,
-    Midline =
-      dplyr::if_else(
-        is.na(MIDLINEa), MIDLINEb, MIDLINEa),
-    `Upper Limit` =
-      dplyr::if_else(is.na(MIDLINEa), UPPERb, UPPERa),
-    `Lower Limit` =
-      dplyr::if_else(is.na(MIDLINEa), LOWERb, LOWERa),
-    `Lower Limit` =
-      dplyr::if_else(`Lower Limit` < 0, 0, `Lower Limit`),
-
-    label = paste0(
-      "# positive tests: ", n,
-      "\n# tests: ", N,
-      "\nPositivity rate: ",round(`Observed %`*100, 2), "%")
-  )
+  dataset %<>% postprocess()
 
 
 
