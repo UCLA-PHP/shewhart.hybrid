@@ -29,8 +29,8 @@ postprocess = function(data, digits = 2)
         "# positive tests: ", n,
         "\n# tests: ", N,
         "\nPositivity rate: ",round(`Observed %`*100, digits), "%",
-        "\nIn Epoch #", EPOCH, ": Midline = ", round(Midline*100, digits), "%",
-        if_else(phase_change, "\nDetected new epoch due to ", ""),
+        "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*100, digits), "%",
+        if_else(phase_change, "\nDetected new phase due to ", ""),
         SC)
     )
 }

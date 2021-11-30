@@ -1,7 +1,6 @@
 #=============================================================================
 # P_Prime_Funnel Function:
 #   Send a data frame containing:
-#     Place:  The setting from where the events are reported
 #     n:    The numerator for the event proportion
 #     N:    The denominator for the event proportion
 #=============================================================================
@@ -34,18 +33,8 @@ P_Prime_Funnel <- function(Pchart_Data) {
   SigmaZ <- ( sum(Pchart_Data$MR, na.rm = TRUE) ) / ( 1.128*sum(Pchart_Data$Screened_MR, na.rm = TRUE) )
 
 
-  Pchart_Data$LOWER <- Pchart_Data$MIDLINE - 3*SigmaZ*sqrt(Pchart_Data$MIDLINE*(1-Pchart_Data$MIDLINE)/Pchart_Data$N)
-  Pchart_Data$UPPER <- Pchart_Data$MIDLINE + 3*SigmaZ*sqrt(Pchart_Data$MIDLINE*(1-Pchart_Data$MIDLINE)/Pchart_Data$N)
-
-
-
-    #===============================================================================
-    #   Tidy the data, keeping only those values we need
-    #===============================================================================
-
-    Pchart_Data <- Pchart_Data %>% select(place, n, N, Dot,
-                                MIDLINE, UPPER, LOWER)
-
+  Pchart_Data$LOWER <- pmax(0, Pchart_Data$MIDLINE - 3*SigmaZ*sqrt(Pchart_Data$MIDLINE*(1-Pchart_Data$MIDLINE)/Pchart_Data$N))
+  Pchart_Data$UPPER <- pmin(1, Pchart_Data$MIDLINE + 3*SigmaZ*sqrt(Pchart_Data$MIDLINE*(1-Pchart_Data$MIDLINE)/Pchart_Data$N))
 
   return(Pchart_Data)
 

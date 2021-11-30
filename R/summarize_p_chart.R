@@ -84,9 +84,9 @@ summarize_p_chart = function(
     dplyr::rename(
       `Previous midline` = MIDLINE_0,
       `Current midline` = MIDLINE_1,
-      `Start of prev. epoch` = date_0,
-      `Start of cur. epoch` = date_1,
-      `Days since cur. epoch start` = days
+      `Start of prev. phase` = date_0,
+      `Start of cur. phase` = date_1,
+      `Days since cur. phase start` = days
     )
 
   return(Summ_Tab3)
