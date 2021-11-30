@@ -6,7 +6,7 @@
 #' @export
 #' @importFrom dplyr mutate rename if_else
 #'
-postprocess = function(data, digits = 2)
+postprocess = function(data, digits = 2, events = "positive tests", trials = "tests", proportion = "Positivity rate")
 {
   data |>
   dplyr::rename(
@@ -26,9 +26,9 @@ postprocess = function(data, digits = 2)
         dplyr::if_else(`Lower Limit` < 0, 0, `Lower Limit`),
 
       label = paste0(
-        "# positive tests: ", n,
-        "\n# tests: ", N,
-        "\nPositivity rate: ",round(`Observed %`*100, digits), "%",
+        "# ", events, ": ", n,
+        "\n# ", trials, ": ", N,
+        "\n", proportion, ": ",round(`Observed %`*100, digits), "%",
         "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*100, digits), "%",
         if_else(phase_change, "\nDetected new phase due to ", ""),
         SC)
