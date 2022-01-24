@@ -9,6 +9,7 @@
 #' Title
 #'
 #' @param Uchart_Data
+#' @param to_remove
 #'
 #' @return
 #' @export

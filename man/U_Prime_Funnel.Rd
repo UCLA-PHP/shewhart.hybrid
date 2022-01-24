@@ -10,7 +10,7 @@ U_Prime_Funnel(
 )
 }
 \arguments{
-\item{Uchart_Data}{}
+\item{to_remove}{}
 }
 \value{
 
