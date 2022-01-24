@@ -20,8 +20,16 @@ URL: https://github.com/d-morrison/shewhart.hybrid,
     https://d-morrison.github.io/shewhart.hybrid/
 BugReports: https://github.com/d-morrison/shewhart.hybrid/issues
 Suggests: 
+    broom,
+    DT,
+    googlesheets4,
+    httr,
     knitr,
-    rmarkdown
+    lubridate,
+    pander,
+    readr,
+    rmarkdown,
+    tidyverse
 VignetteBuilder: knitr
 RoxygenNote: 7.1.2
 Depends: 
@@ -29,4 +37,5 @@ Depends:
 Imports: 
     magrittr,
     dplyr,
-    plotly
+    plotly,
+    tidyr
