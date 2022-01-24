@@ -37,8 +37,8 @@ U_Prime_Funnel <- function(Uchart_Data,
   SigmaZ <- ( mean(Uchart_Data$MR, na.rm = TRUE) ) / 1.128
 
 
-  Uchart_Data$LOWER <- Uchart_Data$MIDLINE - 3*SigmaZ*sqrt(Uchart_Data$MIDLINE/Uchart_Data$N)
-  Uchart_Data$UPPER <- Uchart_Data$MIDLINE + 3*SigmaZ*sqrt(Uchart_Data$MIDLINE/Uchart_Data$N)
+  Uchart_Data$LOWER <- pmax(0, Uchart_Data$MIDLINE - 3*SigmaZ*sqrt(Uchart_Data$MIDLINE/Uchart_Data$N))
+  Uchart_Data$UPPER <- pmax(0, Uchart_Data$MIDLINE + 3*SigmaZ*sqrt(Uchart_Data$MIDLINE/Uchart_Data$N))
 
 
     #===============================================================================
