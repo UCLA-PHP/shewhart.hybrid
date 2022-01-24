@@ -4,7 +4,12 @@
 \alias{summarize_p_chart}
 \title{Title}
 \usage{
-summarize_p_chart(data, place_vars = "place", reference_date = max(data$date))
+summarize_p_chart(
+  data,
+  place_vars = "place",
+  reference_date = max(data$date),
+  digits = 4
+)
 }
 \arguments{
 \item{reference_date}{}

@@ -4,7 +4,13 @@
 \alias{postprocess}
 \title{Postprocess chart data}
 \usage{
-postprocess(data)
+postprocess(
+  data,
+  digits = 2,
+  events = "positive tests",
+  trials = "tests",
+  proportion = "Positivity rate"
+)
 }
 \arguments{
 \item{data}{}
