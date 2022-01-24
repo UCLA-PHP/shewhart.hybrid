@@ -4,7 +4,10 @@
 \alias{U_Prime_Funnel}
 \title{Title}
 \usage{
-U_Prime_Funnel(Uchart_Data)
+U_Prime_Funnel(
+  Uchart_Data,
+  to_remove = c("MR", "Sigma_i", "Zi", "Screened_MR")
+)
 }
 \arguments{
 \item{Uchart_Data}{}

@@ -14,16 +14,18 @@
 #' @export
 #'
 
-U_Prime_Funnel <- function(Uchart_Data) {
+U_Prime_Funnel <- function(Uchart_Data,
+                           to_remove = c("MR", "Sigma_i", "Zi", "Screened_MR"))
+  {
 
 
   Uchart_Data <- Uchart_Data[order(Uchart_Data$N), ]
-  Uchart_Data$Dot <- Uchart_Data$n/Uchart_Data$N
+  Uchart_Data$rate <- Uchart_Data$n/Uchart_Data$N
 
   Uchart_Data$MIDLINE <- sum(Uchart_Data$n)/sum(Uchart_Data$N)
 
   Uchart_Data$Sigma_i <- sqrt(Uchart_Data$MIDLINE/Uchart_Data$N)
-  Uchart_Data$Zi <- (Uchart_Data$Dot - Uchart_Data$MIDLINE)/Uchart_Data$Sigma_i
+  Uchart_Data$Zi <- (Uchart_Data$rate - Uchart_Data$MIDLINE)/Uchart_Data$Sigma_i
 
   Uchart_Data$MR <- abs( Uchart_Data$Zi - lag(Uchart_Data$Zi) )
 
@@ -42,8 +44,7 @@ U_Prime_Funnel <- function(Uchart_Data) {
     #   Tidy the data, keeping only those values we need
     #===============================================================================
 
-    Uchart_Data <- Uchart_Data %>% select(place, n, N, Dot,
-                                MIDLINE, UPPER, LOWER)
+    Uchart_Data <- Uchart_Data %>% select(-any_of(to_remove))
 
 
   return(Uchart_Data)
