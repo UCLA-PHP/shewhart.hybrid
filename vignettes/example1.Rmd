@@ -59,8 +59,8 @@ library(googlesheets4)
 # Run the Function Code if you need to refresh it
 #===============================================================================
 
-# library("shewhart.hybrid")
-load_all()
+library("shewhart.hybrid")
+# load_all()
 #===============================================================================
 
 # Read the data from the NY Times GitHub Site

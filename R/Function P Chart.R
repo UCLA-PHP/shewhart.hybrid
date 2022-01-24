@@ -202,10 +202,10 @@ P_Chart <- function(Pchart_Data) {
     #   OutputData
     #===============================================================================
 
-    Pchart_Data <- Pchart_Data %>% select(date, n, N, Dot,
-                                MIDLINEa, UPPERa, LOWERa,
-                                MIDLINEb, UPPERb, LOWERb,
-                                Phase_Ch, PhaseCount, SC)
+    Pchart_Data <- Pchart_Data %>% select(any_of(c("date", "place", "n", "N", "Dot",
+                                "MIDLINEa", "UPPERa", "LOWERa",
+                                "MIDLINEb", "UPPERb", "LOWERb",
+                                "Phase_Ch", "PhaseCount", "SC")))
 
 
     Pchart_Data$MIDLINEa <- na_if(Pchart_Data$MIDLINEa, -99)

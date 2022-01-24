@@ -14,22 +14,19 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(shewhart.hybrid)
-```
+Use the example percent positive data by age group to test creating a P chart
 
-```{r}
-#===============================================================================
-# Use the example percent positive data by age group to test creating a P chart
-# In this example we will create charts for age group, rather than location
-# Hence some of the variable names will still refer to place settings rather
-# than age group
-#===============================================================================
+In this example we will create charts for age group, rather than location
+Hence some of the variable names will still refer to place settings rather
+than age group
 
+```{r setup, message=FALSE}
 
 #===============================================================================
 # Set up all the library connections we need
 #===============================================================================
+
+library(shewhart.hybrid)
 
 library(httr)
 library(DT)
@@ -38,17 +35,17 @@ library(broom)
 library(readr)
 library(lubridate)
 library(magrittr)
-load_all()
+library(plotly)
+library(pander)
+panderOptions("table.split.table", Inf)
 
-#===============================================================================
-# Read in the Percent Positive by age group data
-#===============================================================================
+```
 
-Pchart_Data = 
-  read_csv("inst/extdata/P Chart Test.csv") %>%
-  # Make sure the date is formatted correctly
-  mutate(
-    date = as.Date(date, "%m/%d/%Y"))
+View the data (included in the `shewhart.hybrid` package:)
+
+```{r}
+
+print(Pchart_Test_Data)
 
 ```
 
@@ -60,10 +57,10 @@ Pchart_Data =
 # (in this case age group rather than place)  
 #===============================================================================
 
-Pchart_Data$stateR = rank(Pchart_Data$place, ties.method = "min")
-Pchart_Data$StateRR = match(Pchart_Data$stateR, sort(unique(Pchart_Data$stateR)))
+Pchart_Test_Data$stateR = rank(Pchart_Test_Data$place, ties.method = "min")
+Pchart_Test_Data$StateRR = match(Pchart_Test_Data$stateR, sort(unique(Pchart_Test_Data$stateR)))
 
-Place_END = max(Pchart_Data$StateRR)
+Place_END = max(Pchart_Test_Data$StateRR)
 
 
 #===============================================================================
@@ -75,8 +72,8 @@ OutputData = NULL
 k=1
 for (k in 1:Place_END) {
   Statei = 
-    filter(Pchart_Data, StateRR == k) %>%
-    compute_hybrid_p_chart()
+    filter(Pchart_Test_Data, StateRR == k) %>%
+    P_Chart() %>% suppressWarnings()
     
   
   OutputData %<>% bind_rows(Statei)
@@ -88,7 +85,7 @@ for (k in 1:Place_END) {
 
 ```{r}
 
-library(plotly)
+
 temp = OutputData %>% dplyr::filter(place == "12-14")
 plot_p_chart(data = temp, mode1 = "lines")
 
@@ -98,6 +95,6 @@ plot_p_chart(data = temp, mode1 = "lines")
 
 Summ_Tab = summarize_p_chart(OutputData)
 
-
+pander(Summ_Tab)
 ```
 
