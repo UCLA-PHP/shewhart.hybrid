@@ -1,4 +1,4 @@
-#' Postprocess chart data
+#' Postprocess p and p-prime chart data
 #'
 #' @param data
 #'
@@ -6,7 +6,7 @@
 #' @export
 #' @importFrom dplyr mutate rename if_else
 #'
-postprocess = function(data, digits = 2, events = "positive tests", trials = "tests", proportion = "Positivity rate")
+postprocess_p_chart = function(data, digits = 2, events = "positive tests", trials = "tests", proportion = "Positivity rate")
 {
   data |>
   dplyr::rename(
@@ -18,12 +18,11 @@ postprocess = function(data, digits = 2, events = "positive tests", trials = "te
       Midline =
         dplyr::if_else(
           is.na(MIDLINEa), MIDLINEb, MIDLINEa),
-      `Upper Limit` =
-        dplyr::if_else(is.na(MIDLINEa), UPPERb, UPPERa),
+      `Upper Limit` = dplyr::if_else(is.na(MIDLINEa), UPPERb, UPPERa),
+      `Upper Limit` = pmin(1, `Upper Limit`),
       `Lower Limit` =
         dplyr::if_else(is.na(MIDLINEa), LOWERb, LOWERa),
-      `Lower Limit` =
-        dplyr::if_else(`Lower Limit` < 0, 0, `Lower Limit`),
+      `Lower Limit` = pmax(0, `Lower Limit`),
 
       label = paste0(
         "# ", events, ": ", n,
