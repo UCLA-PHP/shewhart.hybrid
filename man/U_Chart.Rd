@@ -4,10 +4,10 @@
 \alias{U_Chart}
 \title{Title}
 \usage{
-U_Chart(Uchart_Data)
+U_Chart(dataset)
 }
 \arguments{
-\item{Uchart_Data}{a data frame containing:}
+\item{dataset}{a data frame containing:}
 }
 \value{
 

@@ -22,5 +22,5 @@ U_Prime(dataset)
 Title
 }
 \author{
-Gareth Parry <gareth.j.parry@gmail.com>
+Gareth Parry
 }
