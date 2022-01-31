@@ -7,11 +7,11 @@
 postprocess_u_chart(
   data,
   digits = 2,
-  events = "close contacts",
+  events = "close contact",
   trials = "primary case",
   proportion = "Observed rate",
   multiplier = 1,
-  suffix = paste("", events, "per", trials)
+  suffix = paste0(" ", events, "s per ", trials)
 )
 }
 \arguments{
