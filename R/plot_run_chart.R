@@ -36,17 +36,7 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
 
   ) %>%
     plotly::add_trace(
-      mode = mode1,
       data = data %>% dplyr::group_by(EPOCH),
-      name = "Midline",
-      y = ~Midline * 100,
-      size = NULL,
-      text = NULL,
-      marker = NULL,
-      color = I("red"),
-      line = list(width = 1)
-    ) %>%
-    plotly::add_trace(
       mode = mode1,
       size = NULL,
       text = NULL,
@@ -81,6 +71,17 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
         sizemode = "area"
       )
     ) %>%
+    plotly::add_trace(
+      mode = mode1,
+      name = "Midline",
+      y = ~Midline * 100,
+      size = NULL,
+      text = NULL,
+      marker = NULL,
+      color = I("red"),
+      line = list(width = 1)
+    ) %>%
+
     plotly::layout(
       title = title,
       yaxis = list(title = yname,
