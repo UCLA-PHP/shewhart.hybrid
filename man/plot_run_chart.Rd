@@ -11,11 +11,13 @@ plot_run_chart(
   sizes = c(1, 100),
   yname = "Positivity rate (\%)",
   xname = NA,
-  legend.y = 0
+  legend.y = 0,
+  multiplier = 100,
+  point_name = "Observed \%"
 )
 }
 \arguments{
-\item{xname}{}
+\item{point_name}{}
 }
 \value{
 

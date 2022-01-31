@@ -6,6 +6,9 @@
 #' @param sizes
 #' @param yname
 #' @param xname
+#' @param legend.y
+#' @param multiplier
+#' @param point_name
 #'
 #' @return
 #' @export
@@ -15,15 +18,17 @@
 #' @importFrom plotly plot_ly add_lines layout
 plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
                         yname = 'Positivity rate (%)', xname = NA,
-                        legend.y = 0)
+                        legend.y = 0,
+                        multiplier = 100,
+                        point_name = "Observed %")
 {
 
   plotly::plot_ly(
     data,
     # data = data %>% dplyr::group_by(EPOCH),
     x = ~date,
-    y = ~`Observed %` * 100,
-    name = "Observed %",
+    y = ~`Observed %` * multiplier,
+    name = point_name,
     type = "scatter",
     # color = ~factor(EPOCH),
     mode = "lines+markers",
@@ -42,7 +47,7 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
       size = NULL,
       text = NULL,
       marker = NULL,
-      y = ~`Lower Limit` * 100,
+      y = ~`Lower Limit` * multiplier,
       name = "Lower Limit",
       color = I("gray"),
       line = list(width = 2)
@@ -53,7 +58,7 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
       size = NULL,
       text = NULL,
       marker = NULL,
-      y = ~`Upper Limit` * 100,
+      y = ~`Upper Limit` * multiplier,
       name = "Upper Limit",
       color = I("gray"),
       line = list(width = 2)
@@ -64,7 +69,7 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
       color = I("orange"),
       x = ~ date,
       # y = ~`Observed %` * 100
-      y = ~Phase_Ch *100,
+      y = ~Phase_Ch *multiplier,
       size = ~N,
       sizes = sizes,
       marker = list(
@@ -75,7 +80,7 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
     plotly::add_trace(
       mode = mode1,
       name = "Midline",
-      y = ~Midline * 100,
+      y = ~Midline * multiplier,
       size = NULL,
       text = NULL,
       marker = NULL,
