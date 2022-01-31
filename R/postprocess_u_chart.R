@@ -11,11 +11,11 @@
 #' @importFrom dplyr mutate rename if_else
 #'
 postprocess_u_chart = function(data, digits = 2,
-                               events = "close contact",
+                               events = "close contacts",
                                trials = "primary case",
                                proportion = "Observed rate",
                                multiplier = 1,
-                               suffix = paste0(" ", events, "s per ", trials))
+                               suffix = paste0(" ", events, " per ", trials))
 {
   data |>
     dplyr::rename(
@@ -31,7 +31,7 @@ postprocess_u_chart = function(data, digits = 2,
       `Lower Limit` = pmax(0, `Lower Limit`),
 
       label = paste0(
-        "# ", events, "s: ", n,
+        "# ", events, ": ", n,
         "\n# ", trials, "s: ", N,
         "\n", proportion, ": ",round(`Observed %`*multiplier, digits), suffix,
         "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*multiplier, digits), suffix,
