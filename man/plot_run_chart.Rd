@@ -10,7 +10,8 @@ plot_run_chart(
   mode1 = "lines",
   sizes = c(1, 100),
   yname = "Positivity rate (\%)",
-  xname = NA
+  xname = NA,
+  legend.y = 0
 )
 }
 \arguments{

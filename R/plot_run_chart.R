@@ -14,7 +14,8 @@
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
 plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
-                        yname = 'Positivity rate (%)', xname = NA)
+                        yname = 'Positivity rate (%)', xname = NA,
+                        legend.y = 0)
 {
 
   plotly::plot_ly(
@@ -87,6 +88,6 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
       yaxis = list(title = yname,
                    rangemode = "tozero"),
       xaxis = list(title = xname),
-      legend = list(orientation = 'h')
+      legend = list(orientation = 'h',  y = legend.y)
     )
 }
