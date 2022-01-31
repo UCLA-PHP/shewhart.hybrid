@@ -14,7 +14,8 @@ plot_run_chart(
   legend.y = 0,
   multiplier = 100,
   point_name = "Observed \%",
-  hoverinfo = "x+text"
+  hoverinfo = "x+text",
+  ylab.position = 0
 )
 }
 \arguments{

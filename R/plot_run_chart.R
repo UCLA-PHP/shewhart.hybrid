@@ -27,7 +27,8 @@ plot_run_chart = function(
   legend.y = 0,
   multiplier = 100,
   point_name = "Observed %",
-  hoverinfo = "x+text")
+  hoverinfo = "x+text",
+  ylab.position = 0)
 {
 
   plotly::plot_ly(
@@ -98,6 +99,7 @@ plot_run_chart = function(
     plotly::layout(
       title = title,
       yaxis = list(title = yname,
+                   position = ylab.position,
                    rangemode = "tozero"),
       xaxis = list(title = xname),
       legend = list(orientation = 'h',  y = legend.y)
