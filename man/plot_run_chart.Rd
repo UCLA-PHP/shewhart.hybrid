@@ -13,11 +13,12 @@ plot_run_chart(
   xname = NA,
   legend.y = 0,
   multiplier = 100,
-  point_name = "Observed \%"
+  point_name = "Observed \%",
+  hoverinfo = "x+text"
 )
 }
 \arguments{
-\item{point_name}{}
+\item{hoverinfo}{}
 }
 \value{
 

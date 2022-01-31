@@ -9,6 +9,7 @@
 #' @param legend.y
 #' @param multiplier
 #' @param point_name
+#' @param hoverinfo
 #'
 #' @return
 #' @export
@@ -25,7 +26,8 @@ plot_run_chart = function(
   xname = NA,
   legend.y = 0,
   multiplier = 100,
-  point_name = "Observed %")
+  point_name = "Observed %",
+  hoverinfo = "x+text")
 {
 
   plotly::plot_ly(
@@ -37,6 +39,7 @@ plot_run_chart = function(
     type = "scatter",
     # color = ~factor(EPOCH),
     mode = "lines+markers",
+    hoverinfo = hoverinfo,
     text = ~label,
     size = ~N,
     sizes = sizes,
