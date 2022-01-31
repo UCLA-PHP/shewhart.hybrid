@@ -4,10 +4,16 @@
 \alias{plot_p_chart}
 \title{Title}
 \usage{
-plot_p_chart(data, title = "", mode1 = "lines", sizes = c(1, 100))
+plot_p_chart(
+  data,
+  title = "",
+  mode1 = "lines",
+  sizes = c(1, 100),
+  yname = "Positivity rate (\%)"
+)
 }
 \arguments{
-\item{title}{}
+\item{yname}{}
 }
 \value{
 
