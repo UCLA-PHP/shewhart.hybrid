@@ -9,11 +9,12 @@ plot_p_chart(
   title = "",
   mode1 = "lines",
   sizes = c(1, 100),
-  yname = "Positivity rate (\%)"
+  yname = "Positivity rate (\%)",
+  xname = NA
 )
 }
 \arguments{
-\item{yname}{}
+\item{xname}{}
 }
 \value{
 

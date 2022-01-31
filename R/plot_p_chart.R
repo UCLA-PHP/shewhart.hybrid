@@ -5,6 +5,7 @@
 #' @param mode1
 #' @param sizes
 #' @param yname
+#' @param xname
 #'
 #' @return
 #' @export
@@ -13,7 +14,7 @@
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
 plot_p_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
-                        yname = 'Positivity rate (%)')
+                        yname = 'Positivity rate (%)', xname = NA)
 {
 
   plotly::plot_ly(
@@ -84,7 +85,7 @@ plot_p_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
       title = title,
       yaxis = list(title = yname,
                    rangemode = "tozero"),
-      xaxis = list(title = NA),
+      xaxis = list(title = xname),
       legend = list(orientation = 'h')
     )
 }
