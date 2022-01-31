@@ -15,7 +15,7 @@ postprocess_u_chart = function(data, digits = 2,
                                trials = "primary case",
                                proportion = "Observed rate",
                                multiplier = 1,
-                               suffix = paste(" ", events, "per", trials))
+                               suffix = paste("", events, "per", trials))
 {
   data |>
     dplyr::rename(

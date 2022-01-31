@@ -11,7 +11,7 @@ postprocess_u_chart(
   trials = "primary case",
   proportion = "Observed rate",
   multiplier = 1,
-  suffix = paste(" ", events, "per", trials)
+  suffix = paste("", events, "per", trials)
 )
 }
 \arguments{
