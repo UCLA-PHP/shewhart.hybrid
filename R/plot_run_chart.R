@@ -16,11 +16,16 @@
 #'
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
-plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
-                        yname = 'Positivity rate (%)', xname = NA,
-                        legend.y = 0,
-                        multiplier = 100,
-                        point_name = "Observed %")
+plot_run_chart = function(
+  data,
+  title = "",
+  mode1 = "lines",
+  sizes = c(1,100),
+  yname = 'Positivity rate (%)',
+  xname = NA,
+  legend.y = 0,
+  multiplier = 100,
+  point_name = "Observed %")
 {
 
   plotly::plot_ly(
@@ -58,7 +63,7 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
       size = NULL,
       text = NULL,
       marker = NULL,
-      y = ~`Upper Limit` * multiplier,
+      y = ~ `Upper Limit` * multiplier,
       name = "Upper Limit",
       color = I("gray"),
       line = list(width = 2)
@@ -68,9 +73,8 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
       name = "Start of Phase",
       color = I("orange"),
       x = ~ date,
-      # y = ~`Observed %` * 100
-      y = ~Phase_Ch *multiplier,
-      size = ~N,
+      y = ~ Phase_Ch * multiplier,
+      size = ~ N,
       sizes = sizes,
       marker = list(
         # opacity = 0.7,
@@ -80,7 +84,7 @@ plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
     plotly::add_trace(
       mode = mode1,
       name = "Midline",
-      y = ~Midline * multiplier,
+      y = ~ Midline * multiplier,
       size = NULL,
       text = NULL,
       marker = NULL,
