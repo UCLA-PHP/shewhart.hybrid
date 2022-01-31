@@ -87,7 +87,7 @@ for (k in 1:Place_END) {
 
 
 temp = OutputData %>% dplyr::filter(place == "12-14")
-plot_p_chart(data = temp, mode1 = "lines")
+plot_run_chart(data = temp, mode1 = "lines")
 
 ```
 

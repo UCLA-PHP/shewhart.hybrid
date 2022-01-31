@@ -13,7 +13,7 @@
 #'
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
-plot_p_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
+plot_run_chart = function(data, title = "", mode1 = "lines", sizes = c(1,100),
                         yname = 'Positivity rate (%)', xname = NA)
 {
 
