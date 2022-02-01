@@ -31,6 +31,14 @@ plot_run_chart = function(
   ylab.position = 0)
 {
 
+  data =
+    data |>
+    dplyr::mutate(
+      label_high = glue::glue("Upper control limit: {(UPPER*multiplier) |> formatC(digits = 2, format = 'f')}"),
+      label_low = glue::glue("Lower control limit: {(LOWER*multiplier) |> formatC(digits = 2, format = 'f')}"),
+      label_overall = glue::glue("Midline: {(MIDLINE*multiplier) |> formatC(digits = 2, format = 'f')}")
+    )
+
   plotly::plot_ly(
     data,
     # data = data %>% dplyr::group_by(EPOCH),
@@ -54,7 +62,7 @@ plot_run_chart = function(
       data = data %>% dplyr::group_by(EPOCH),
       mode = mode1,
       size = NULL,
-      text = NULL,
+      text = ~label_low,
       marker = NULL,
       y = ~`Lower Limit` * multiplier,
       name = "Lower Limit",
@@ -65,7 +73,7 @@ plot_run_chart = function(
     plotly::add_trace(
       mode = mode1,
       size = NULL,
-      text = NULL,
+      text = ~label_high,
       marker = NULL,
       y = ~ `Upper Limit` * multiplier,
       name = "Upper Limit",
@@ -77,6 +85,7 @@ plot_run_chart = function(
       name = "Start of Phase",
       color = I("orange"),
       x = ~ date,
+      text =  ~label,
       y = ~ Phase_Ch * multiplier,
       size = ~ N,
       sizes = sizes,
@@ -90,7 +99,7 @@ plot_run_chart = function(
       name = "Midline",
       y = ~ Midline * multiplier,
       size = NULL,
-      text = NULL,
+      text = ~label_overall,
       marker = NULL,
       color = I("red"),
       line = list(width = 1)
