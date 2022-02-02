@@ -14,7 +14,7 @@
 #' @return
 #' @export
 #'
-#'
+#' @author Doug Ezra Morrison <demorrison@ucdavis.edu>
 #' @importFrom dplyr filter group_by
 #' @importFrom plotly plot_ly add_lines layout
 plot_run_chart = function(
@@ -34,9 +34,9 @@ plot_run_chart = function(
   data =
     data |>
     dplyr::mutate(
-      label_high = glue::glue("Upper control limit: {(UPPER*multiplier) |> formatC(digits = 2, format = 'f')}"),
-      label_low = glue::glue("Lower control limit: {(LOWER*multiplier) |> formatC(digits = 2, format = 'f')}"),
-      label_overall = glue::glue("Midline: {(MIDLINE*multiplier) |> formatC(digits = 2, format = 'f')}")
+      label_high = glue::glue("Upper control limit: {(`Upper Limit` * multiplier) |> formatC(digits = 2, format = 'f')}"),
+      label_low = glue::glue("Lower control limit: {(`Lower Limit` * multiplier) |> formatC(digits = 2, format = 'f')}"),
+      label_overall = glue::glue("Midline: {(Midline * multiplier) |> formatC(digits = 2, format = 'f')}")
     )
 
   plotly::plot_ly(
