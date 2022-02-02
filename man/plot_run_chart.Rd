@@ -11,7 +11,7 @@ plot_run_chart(
   sizes = c(1, 100),
   yname = "Positivity rate (\%)",
   xname = NA,
-  legend.y = -0.25,
+  legend.y = -0.2,
   multiplier = 100,
   point_name = "Observed \%",
   hoverinfo = "x+text",
