@@ -4,10 +4,10 @@
 \alias{P_Prime}
 \title{Title}
 \usage{
-P_Prime(Pchart_Data)
+P_Prime(Pchart_Data, ...)
 }
 \arguments{
-\item{Pchart_Data}{}
+\item{...}{}
 }
 \value{
 

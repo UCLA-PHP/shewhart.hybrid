@@ -4,10 +4,10 @@
 \alias{P_Chart}
 \title{Title}
 \usage{
-P_Chart(Pchart_Data)
+P_Chart(Pchart_Data, ...)
 }
 \arguments{
-\item{Pchart_Data}{}
+\item{...}{}
 }
 \value{
 
