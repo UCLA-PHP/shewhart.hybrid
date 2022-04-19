@@ -10,6 +10,9 @@
 #' @param multiplier
 #' @param point_name
 #' @param hoverinfo
+#' @param ylab.position
+#' @param limit_width
+#' @param midline_width
 #'
 #' @return
 #' @export
@@ -28,7 +31,9 @@ plot_run_chart = function(
   multiplier = 100,
   point_name = "Observed %",
   hoverinfo = "x+text",
-  ylab.position = 0)
+  ylab.position = 0,
+  limit_width = 2,
+  midline_width = 1)
 {
 
   data =
@@ -67,7 +72,7 @@ plot_run_chart = function(
       y = ~`Lower Limit` * multiplier,
       name = "Lower Limit",
       color = I("gray"),
-      line = list(width = 2)
+      line = list(width = limit_width)
 
     ) %>%
     plotly::add_trace(
@@ -78,7 +83,7 @@ plot_run_chart = function(
       y = ~ `Upper Limit` * multiplier,
       name = "Upper Limit",
       color = I("gray"),
-      line = list(width = 2)
+      line = list(width = limit_width)
     ) %>%
     plotly::add_markers(
       # data %>% dplyr::filter(phase_change) %>% dplyr::group_by(EPOCH),
@@ -102,7 +107,7 @@ plot_run_chart = function(
       text = ~label_overall,
       marker = NULL,
       color = I("red"),
-      line = list(width = 1)
+      line = list(width = midline_width)
     ) %>%
 
     plotly::layout(
