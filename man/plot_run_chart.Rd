@@ -20,11 +20,12 @@ plot_run_chart(
   ylab.position = 0,
   line_width = 2,
   limit_width = line_width,
-  midline_width = 1
+  midline_width = 1,
+  download_format = "svg"
 )
 }
 \arguments{
-\item{line_width}{}
+\item{download_format}{}
 }
 \value{
 

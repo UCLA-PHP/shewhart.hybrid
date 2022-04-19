@@ -16,6 +16,7 @@
 #' @param marker_size_range
 #' @param sizemode
 #' @param line_width
+#' @param download_format
 #'
 #' @return
 #' @export
@@ -39,7 +40,8 @@ plot_run_chart = function(
   ylab.position = 0,
   line_width = 2,
   limit_width = line_width,
-  midline_width = 1)
+  midline_width = 1,
+  download_format = "svg")
 {
 
   data =
@@ -125,5 +127,11 @@ plot_run_chart = function(
         rangemode = "tozero"),
       xaxis = list(title = xname),
       legend = list(orientation = 'h',  y = legend.y)
+    ) %>%
+    plotly::config(
+      toImageButtonOptions = list(
+        format = download_format,
+        filename = "hybrid-shewhart-chart"
+      )
     )
 }
