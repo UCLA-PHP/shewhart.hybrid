@@ -8,12 +8,12 @@ plot_run_chart(
   data,
   title = "",
   mode1 = "lines",
-  sizes = c(1, 100),
   yname = "Positivity rate (\%)",
   xname = NA,
   legend.y = -0.2,
   multiplier = 100,
   marker_size = ~N,
+  marker_size_range = c(1, 100),
   sizemode = "area",
   point_name = "Observed \%",
   hoverinfo = "x+text",
@@ -24,7 +24,7 @@ plot_run_chart(
 )
 }
 \arguments{
-\item{midline_width}{}
+\item{line_width}{}
 }
 \value{
 

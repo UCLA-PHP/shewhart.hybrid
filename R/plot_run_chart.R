@@ -3,7 +3,6 @@
 #' @param data
 #' @param title
 #' @param mode1
-#' @param sizes
 #' @param yname
 #' @param xname
 #' @param legend.y
@@ -13,6 +12,10 @@
 #' @param ylab.position
 #' @param limit_width
 #' @param midline_width
+#' @param marker_size
+#' @param marker_size_range
+#' @param sizemode
+#' @param line_width
 #'
 #' @return
 #' @export
@@ -24,12 +27,12 @@ plot_run_chart = function(
   data,
   title = "",
   mode1 = "lines",
-  sizes = c(1,100),
   yname = 'Positivity rate (%)',
   xname = NA,
   legend.y = -0.2,
   multiplier = 100,
   marker_size = ~ N,
+  marker_size_range = c(1,100),
   sizemode = "area",
   point_name = "Observed %",
   hoverinfo = "x+text",
@@ -59,7 +62,7 @@ plot_run_chart = function(
     hoverinfo = hoverinfo,
     text = ~label,
     size = marker_size,
-    sizes = sizes,
+    sizes = marker_size_range,
     line = list(width = line_width),
     marker = list(
       # opacity = 0.7,
@@ -97,7 +100,7 @@ plot_run_chart = function(
       text =  ~label,
       y = ~ Phase_Ch * multiplier,
       size = marker_size,
-      sizes = sizes,
+      sizes = marker_size_range,
       line = NULL,
       marker = list(
         # opacity = 0.7,
