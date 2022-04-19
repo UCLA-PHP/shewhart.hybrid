@@ -35,7 +35,7 @@ plot_run_chart = function(
   hoverinfo = "x+text",
   ylab.position = 0,
   line_width = 2,
-    limit_width = line_width,
+  limit_width = line_width,
   midline_width = 1)
 {
 
@@ -58,12 +58,11 @@ plot_run_chart = function(
     mode = "lines+markers",
     hoverinfo = hoverinfo,
     text = ~label,
-
+    size = marker_size,
+    sizes = sizes,
     line = list(width = line_width),
     marker = list(
       # opacity = 0.7,
-      size = marker_size,
-      sizes = sizes,
       sizemode = sizemode
     )
 
@@ -99,6 +98,7 @@ plot_run_chart = function(
       y = ~ Phase_Ch * multiplier,
       size = marker_size,
       sizes = sizes,
+      line = NULL,
       marker = list(
         # opacity = 0.7,
         sizemode = sizemode
@@ -118,8 +118,8 @@ plot_run_chart = function(
     plotly::layout(
       title = title,
       yaxis = list(title = yname,
-                   position = ylab.position,
-                   rangemode = "tozero"),
+        position = ylab.position,
+        rangemode = "tozero"),
       xaxis = list(title = xname),
       legend = list(orientation = 'h',  y = legend.y)
     )
