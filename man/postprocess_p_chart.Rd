@@ -9,7 +9,8 @@ postprocess_p_chart(
   digits = 2,
   events = "positive tests",
   trials = "tests",
-  proportion = "Positivity rate"
+  proportion = "Positivity rate",
+  multiplier = 100
 )
 }
 \arguments{

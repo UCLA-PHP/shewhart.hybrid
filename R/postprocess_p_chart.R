@@ -6,7 +6,13 @@
 #' @export
 #' @importFrom dplyr mutate rename if_else
 #'
-postprocess_p_chart = function(data, digits = 2, events = "positive tests", trials = "tests", proportion = "Positivity rate")
+postprocess_p_chart = function(
+  data,
+  digits = 2,
+  events = "positive tests",
+  trials = "tests",
+  proportion = "Positivity rate",
+  multiplier = 100)
 {
   data |>
   dplyr::rename(
@@ -26,9 +32,9 @@ postprocess_p_chart = function(data, digits = 2, events = "positive tests", tria
 
       label = paste0(
         "# ", events, ": ", n,
-        "\n# ", trials, ": ", N,
-        "\n", proportion, ": ",round(`Observed %`*100, digits), "%",
-        "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*100, digits), "%",
+        "\n# ", trials, ": ", N |> format(big.mark = ","),
+        "\n", proportion, ": ",round(`Observed %`*multiplier, digits), "%",
+        "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*multiplier, digits), "%",
         if_else(phase_change, "\nDetected new phase due to ", ""),
         SC)
     )
