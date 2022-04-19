@@ -31,7 +31,7 @@ postprocess_p_chart = function(
       `Lower Limit` = pmax(0, `Lower Limit`),
 
       label = paste0(
-        "# ", events, ": ", n,
+        "# ", events, ": ", n |> format(big.mark = ","),
         "\n# ", trials, ": ", N |> format(big.mark = ","),
         "\n", proportion, ": ",round(`Observed %`*multiplier, digits), "%",
         "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*multiplier, digits), "%",
