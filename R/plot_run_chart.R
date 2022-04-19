@@ -34,7 +34,8 @@ plot_run_chart = function(
   point_name = "Observed %",
   hoverinfo = "x+text",
   ylab.position = 0,
-    limit_width = 2,
+  line_width = 2,
+    limit_width = line_width,
   midline_width = 1)
 {
 
@@ -57,10 +58,12 @@ plot_run_chart = function(
     mode = "lines+markers",
     hoverinfo = hoverinfo,
     text = ~label,
-    size = marker_size,
-    sizes = sizes,
+
+    line = list(width = line_width),
     marker = list(
       # opacity = 0.7,
+      size = marker_size,
+      sizes = sizes,
       sizemode = sizemode
     )
 

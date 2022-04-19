@@ -18,7 +18,8 @@ plot_run_chart(
   point_name = "Observed \%",
   hoverinfo = "x+text",
   ylab.position = 0,
-  limit_width = 2,
+  line_width = 2,
+  limit_width = line_width,
   midline_width = 1
 )
 }
