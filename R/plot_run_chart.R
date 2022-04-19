@@ -32,7 +32,7 @@ plot_run_chart = function(
   point_name = "Observed %",
   hoverinfo = "x+text",
   ylab.position = 0,
-  limit_width = 2,
+    limit_width = 2,
   midline_width = 1)
 {
 

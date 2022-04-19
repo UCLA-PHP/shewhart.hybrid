@@ -15,11 +15,13 @@ plot_run_chart(
   multiplier = 100,
   point_name = "Observed \%",
   hoverinfo = "x+text",
-  ylab.position = 0
+  ylab.position = 0,
+  limit_width = 2,
+  midline_width = 1
 )
 }
 \arguments{
-\item{hoverinfo}{}
+\item{midline_width}{}
 }
 \value{
 
