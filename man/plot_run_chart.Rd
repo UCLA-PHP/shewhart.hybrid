@@ -13,6 +13,7 @@ plot_run_chart(
   xname = NA,
   legend.y = -0.2,
   multiplier = 100,
+  marker_size = ~N,
   point_name = "Observed \%",
   hoverinfo = "x+text",
   ylab.position = 0,
