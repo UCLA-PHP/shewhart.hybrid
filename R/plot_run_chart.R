@@ -98,7 +98,7 @@ plot_run_chart = function(
       sizes = sizes,
       marker = list(
         # opacity = 0.7,
-        sizemode = sizemode,
+        sizemode = sizemode
       )
     ) %>%
     plotly::add_trace(
