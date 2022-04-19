@@ -30,6 +30,7 @@ plot_run_chart = function(
   legend.y = -0.2,
   multiplier = 100,
   marker_size = ~ N,
+  sizemode = "area",
   point_name = "Observed %",
   hoverinfo = "x+text",
   ylab.position = 0,
@@ -60,7 +61,7 @@ plot_run_chart = function(
     sizes = sizes,
     marker = list(
       # opacity = 0.7,
-      sizemode = "area"
+      sizemode = sizemode
     )
 
   ) %>%
@@ -97,7 +98,7 @@ plot_run_chart = function(
       sizes = sizes,
       marker = list(
         # opacity = 0.7,
-        sizemode = "area"
+        sizemode = sizemode,
       )
     ) %>%
     plotly::add_trace(
