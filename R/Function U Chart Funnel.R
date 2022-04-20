@@ -1,16 +1,10 @@
-#=============================================================================
-# U_Chart_Funnel Function:
-#   Send a data frame containing:
-#     Place:  The setting from where the events are reported
-#     n:      The numerator for the event rate
-#     N:      The denominator for the event rate
-#=============================================================================
-
-#' Title
+#' U_Chart_Funnel Function
 #'
-#' @param Uchart_Data
+#' @param Uchart_Data Send a data frame containing:
+#'     n:      The numerator for the event rate
+#'     N:      The denominator for the event rate
 #'
-#' @return
+#' @return a data frame...
 #' @export
 #'
 U_Chart_Funnel <- function(Uchart_Data) {

@@ -30,6 +30,7 @@ plot_run_chart = function(
   mode1 = "lines",
   yname = 'Positivity rate (%)',
   xname = NA,
+  xlim = range(data$date),
   legend.y = -0.2,
   multiplier = 100,
   marker_size = ~ N,
@@ -125,7 +126,10 @@ plot_run_chart = function(
       yaxis = list(title = yname,
         position = ylab.position,
         rangemode = "tozero"),
-      xaxis = list(title = xname),
+      xaxis = list(
+        range = xlim,
+        title = xname
+        ),
       legend = list(orientation = 'h',  y = legend.y)
     ) %>%
     plotly::config(

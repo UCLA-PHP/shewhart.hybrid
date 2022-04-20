@@ -2,16 +2,18 @@
 % Please edit documentation in R/Function U Chart Funnel.R
 \name{U_Chart_Funnel}
 \alias{U_Chart_Funnel}
-\title{Title}
+\title{U_Chart_Funnel Function}
 \usage{
 U_Chart_Funnel(Uchart_Data)
 }
 \arguments{
-\item{Uchart_Data}{}
+\item{Uchart_Data}{Send a data frame containing:
+n:      The numerator for the event rate
+N:      The denominator for the event rate}
 }
 \value{
-
+a data frame...
 }
 \description{
-Title
+U_Chart_Funnel Function
 }

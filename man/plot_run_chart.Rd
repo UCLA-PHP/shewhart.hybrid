@@ -10,6 +10,7 @@ plot_run_chart(
   mode1 = "lines",
   yname = "Positivity rate (\%)",
   xname = NA,
+  xlim = range(data$date),
   legend.y = -0.2,
   multiplier = 100,
   marker_size = ~N,
