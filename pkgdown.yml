@@ -1,10 +1,10 @@
 pandoc: 2.7.3
-pkgdown: 2.0.2
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   example1: example1.html
   p-chart: p-chart.html
-last_built: 2022-04-20T20:25Z
+last_built: 2022-04-29T00:13Z
 urls:
   reference: https://d-morrison.github.io/shewhart.hybrid/reference
   article: https://d-morrison.github.io/shewhart.hybrid/articles
