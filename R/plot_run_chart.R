@@ -17,6 +17,7 @@
 #' @param sizemode
 #' @param line_width
 #' @param download_format
+#' @param xlim
 #'
 #' @return
 #' @export
@@ -30,7 +31,13 @@ plot_run_chart = function(
   mode1 = "lines",
   yname = 'Positivity rate (%)',
   xname = NA,
-  xlim = range(data$date),
+  xlim = if(data$date |> is.numeric())
+  {
+    range(data$date) + c(-2,2)
+  } else
+  {
+    NULL
+  },
   legend.y = -0.2,
   multiplier = 100,
   marker_size = ~ N,
@@ -129,7 +136,7 @@ plot_run_chart = function(
       xaxis = list(
         range = xlim,
         title = xname
-        ),
+      ),
       legend = list(orientation = 'h',  y = legend.y)
     ) %>%
     plotly::config(
