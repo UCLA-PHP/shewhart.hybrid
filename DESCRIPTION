@@ -38,4 +38,5 @@ Imports:
     magrittr,
     dplyr,
     plotly,
-    tidyr
+    tidyr,
+    glue
