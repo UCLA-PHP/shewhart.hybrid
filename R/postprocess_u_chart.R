@@ -34,11 +34,12 @@ postprocess_u_chart = function(data,
 
       label = glue::glue(
         date_label,
-        "# ", events, ": ", n,
-        "\n# ", trials, "s: ", N,
-        "\n", proportion, ": ",round(`Observed %`*multiplier, digits), suffix,
-        "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*multiplier, digits), suffix,
-        if_else(phase_change, "\nDetected new phase due to ", ""),
-        SC)
+        "# {events}: {n |> format(big.mark = ",")}",
+        "\n# {trials}: {N |> format(big.mark = ",")}",
+        "\n{proportion}: {round(`Observed %`*multiplier, digits)}{suffix}",
+        "\nIn Phase #{EPOCH}: Midline = {round(Midline*multiplier, digits)}{suffix}",
+        "{if_else(phase_change, '\nDetected new phase due to ', '')}{SC}"
+      )
+
     )
 }
