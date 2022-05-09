@@ -10,12 +10,14 @@
 #' @export
 #' @importFrom dplyr mutate rename if_else
 #'
-postprocess_u_chart = function(data, digits = 2,
-                               events = "close contacts",
-                               trials = "primary case",
-                               proportion = "Observed rate",
-                               multiplier = 1,
-                               suffix = paste0(" ", events, " per ", trials))
+postprocess_u_chart = function(data,
+  digits = 2,
+  date_label = "{date} ({weekdays(date)})\n",
+  events = "close contacts",
+  trials = "primary case",
+  proportion = "Observed rate",
+  multiplier = 1,
+  suffix = paste0(" ", events, " per ", trials))
 {
   data |>
     dplyr::rename(
@@ -30,7 +32,8 @@ postprocess_u_chart = function(data, digits = 2,
       `Lower Limit` = dplyr::if_else(is.na(MIDLINEa), LOWERb, LOWERa),
       `Lower Limit` = pmax(0, `Lower Limit`),
 
-      label = paste0(
+      label = glue::glue(
+        date_label,
         "# ", events, ": ", n,
         "\n# ", trials, "s: ", N,
         "\n", proportion, ": ",round(`Observed %`*multiplier, digits), suffix,

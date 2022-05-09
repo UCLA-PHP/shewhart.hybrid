@@ -10,7 +10,7 @@
 postprocess_p_chart = function(
   data,
   digits = 2,
-  date_label = "",
+  date_label = "{date} ({weekdays(date)})\n",
   events = "positive tests",
   trials = "tests",
   proportion = "Positivity rate",
@@ -33,8 +33,8 @@ postprocess_p_chart = function(
       `Lower Limit` = pmax(0, `Lower Limit`),
 
       label = glue::glue(
-        "{date_label}{weekdays(date)}, {date}",
-        "\n# ", events, ": ", n |> format(big.mark = ","),
+        date_label,
+        "# ", events, ": ", n |> format(big.mark = ","),
         "\n# ", trials, ": ", N |> format(big.mark = ","),
         "\n", proportion, ": ",round(`Observed %`*multiplier, digits), "%",
         "\nIn Phase #", EPOCH, ": Midline = ", round(Midline*multiplier, digits), "%",

@@ -7,7 +7,7 @@
 postprocess_p_chart(
   data,
   digits = 2,
-  date_label = "",
+  date_label = "{date} ({weekdays(date)})\\n",
   events = "positive tests",
   trials = "tests",
   proportion = "Positivity rate",

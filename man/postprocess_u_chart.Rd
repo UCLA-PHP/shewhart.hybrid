@@ -7,6 +7,7 @@
 postprocess_u_chart(
   data,
   digits = 2,
+  date_label = "{date} ({weekdays(date)})\\n",
   events = "close contacts",
   trials = "primary case",
   proportion = "Observed rate",
