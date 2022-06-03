@@ -9,9 +9,6 @@ U_Chart(dataset)
 \arguments{
 \item{dataset}{a data frame containing:}
 }
-\value{
-
-}
 \description{
 Title
 }

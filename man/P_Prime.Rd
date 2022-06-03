@@ -9,9 +9,6 @@ P_Prime(Pchart_Data, ...)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

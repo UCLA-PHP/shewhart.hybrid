@@ -9,9 +9,6 @@ compute_hybrid_p_chart(dataset)
 \arguments{
 \item{dataset}{}
 }
-\value{
-
-}
 \description{
 Title
 }

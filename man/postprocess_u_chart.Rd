@@ -18,9 +18,6 @@ postprocess_u_chart(
 \arguments{
 \item{proportion}{}
 }
-\value{
-
-}
 \description{
 Postprocess u and u-prime chart data
 }

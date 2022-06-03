@@ -14,9 +14,6 @@ summarize_p_chart(
 \arguments{
 \item{reference_date}{}
 }
-\value{
-
-}
 \description{
 Title
 }

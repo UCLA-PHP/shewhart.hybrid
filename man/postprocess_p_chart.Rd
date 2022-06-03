@@ -17,9 +17,6 @@ postprocess_p_chart(
 \arguments{
 \item{data}{}
 }
-\value{
-
-}
 \description{
 Postprocess p and p-prime chart data
 }

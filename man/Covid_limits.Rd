@@ -9,9 +9,6 @@ Covid_limits(place, date, events, new_events)
 \arguments{
 \item{new_events}{}
 }
-\value{
-
-}
 \description{
 Title
 }

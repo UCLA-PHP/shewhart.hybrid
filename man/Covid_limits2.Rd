@@ -9,9 +9,6 @@ Covid_limits2(dataset)
 \arguments{
 \item{dataset}{a data.frame or tibble with columns "date" and "new_events"; use this function one population at a time.}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -9,9 +9,6 @@ Covid_Phase2(dataset)
 \arguments{
 \item{dataset}{}
 }
-\value{
-
-}
 \description{
 Title
 }

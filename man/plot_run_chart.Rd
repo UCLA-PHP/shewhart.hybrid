@@ -10,8 +10,12 @@ plot_run_chart(
   mode1 = "lines",
   yname = "Positivity rate (\%)",
   xname = NA,
-  xlim = if (is.numeric(data$date)) {     range(data$date) + c(-2, 2) } else {     NULL
-    },
+  xlim = if (is.numeric(data$date)) {
+     range(data$date) + c(-2, 2)
+ } else {
+    
+    NULL
+ },
   legend.y = -0.2,
   multiplier = 100,
   marker_size = ~N,
@@ -28,9 +32,6 @@ plot_run_chart(
 }
 \arguments{
 \item{xlim}{}
-}
-\value{
-
 }
 \description{
 Title

@@ -9,9 +9,6 @@ P_Chart(Pchart_Data, ...)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

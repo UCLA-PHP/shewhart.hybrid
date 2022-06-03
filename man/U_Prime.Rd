@@ -15,9 +15,6 @@ U_Prime(dataset)
 
     `N`:    The denominator for the event proportion}
 }
-\value{
-
-}
 \description{
 Title
 }

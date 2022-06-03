@@ -12,9 +12,6 @@ U_Prime_Funnel(
 \arguments{
 \item{to_remove}{}
 }
-\value{
-
-}
 \description{
 Title
 }
