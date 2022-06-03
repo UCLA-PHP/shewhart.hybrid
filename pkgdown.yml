@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   example1: example1.html
   p-chart: p-chart.html
-last_built: 2022-05-09T21:30Z
+last_built: 2022-06-03T01:16Z
 urls:
   reference: https://d-morrison.github.io/shewhart.hybrid/reference
   article: https://d-morrison.github.io/shewhart.hybrid/articles
