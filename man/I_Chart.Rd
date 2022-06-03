@@ -2,7 +2,7 @@
 % Please edit documentation in R/Function I Chart II.R
 \name{I_Chart}
 \alias{I_Chart}
-\title{Title}
+\title{I Chart}
 \usage{
 I_Chart(
   date = IChart_Data$date,
@@ -10,9 +10,9 @@ I_Chart(
   IChart_Data = data_frame(date, Dot)
 )
 }
-\arguments{
-\item{IChart_Data}{}
-}
 \description{
-Title
+I Chart
+}
+\author{
+Gareth Parry
 }

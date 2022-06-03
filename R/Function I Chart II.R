@@ -1,9 +1,9 @@
-#' Title
+#' I Chart
 #'
 #' @param date
 #' @param Dot
 #' @param IChart_Data
-#'
+#' @author Gareth Parry
 #' @return
 #' @export
 #'
