@@ -18,6 +18,7 @@ plot_run_chart(
  },
   legend.y = -0.2,
   multiplier = 100,
+  suffix = "",
   marker_size = ~N,
   marker_size_range = c(1, 100),
   sizemode = "area",
@@ -31,7 +32,7 @@ plot_run_chart(
 )
 }
 \arguments{
-\item{xlim}{}
+\item{suffix}{}
 }
 \description{
 Title

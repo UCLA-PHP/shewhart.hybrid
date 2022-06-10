@@ -34,8 +34,8 @@ postprocess_p_chart = function(
 
       label = glue::glue(
         date_label,
-        "# {events}: {n |> format(big.mark = ",")}",
-        "\n# {trials}: {N |> format(big.mark = ",")}",
+        "# {events}: {n |> format(big.mark = ',')}",
+        "\n# {trials}: {N |> format(big.mark = ',')}",
         "\n{proportion}: {round(`Observed %`*multiplier, digits)}%",
         "\nIn Phase #{EPOCH}: Midline = {round(Midline*multiplier, digits)}%",
         "{if_else(phase_change, '\nDetected new phase due to ', '')}{SC}"

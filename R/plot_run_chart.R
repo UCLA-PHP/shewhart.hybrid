@@ -18,6 +18,7 @@
 #' @param line_width
 #' @param download_format
 #' @param xlim
+#' @param suffix
 #'
 #' @return
 #' @export
@@ -40,6 +41,7 @@ plot_run_chart = function(
   },
   legend.y = -0.2,
   multiplier = 100,
+  suffix = "",
   marker_size = ~ N,
   marker_size_range = c(1,100),
   sizemode = "area",
@@ -55,9 +57,9 @@ plot_run_chart = function(
   data =
     data |>
     dplyr::mutate(
-      label_high = glue::glue("Upper control limit: {(`Upper Limit` * multiplier) |> formatC(digits = 2, format = 'f')}"),
-      label_low = glue::glue("Lower control limit: {(`Lower Limit` * multiplier) |> formatC(digits = 2, format = 'f')}"),
-      label_overall = glue::glue("Midline: {(Midline * multiplier) |> formatC(digits = 2, format = 'f')}")
+      label_high = glue::glue("Upper control limit: {(`Upper Limit` * multiplier) |> formatC(digits = 2, format = 'f')}{suffix}"),
+      label_low = glue::glue("Lower control limit: {(`Lower Limit` * multiplier) |> formatC(digits = 2, format = 'f')}{suffix}"),
+      label_overall = glue::glue("Midline: {(Midline * multiplier) |> formatC(digits = 2, format = 'f')}{suffix}")
     )
 
   plotly::plot_ly(
