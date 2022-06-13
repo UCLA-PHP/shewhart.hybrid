@@ -51,7 +51,8 @@ plot_run_chart = function(
   line_width = 2,
   limit_width = line_width,
   midline_width = 1,
-  download_format = "svg")
+  download_format = "svg",
+  group = NULL)
 {
 
   data =

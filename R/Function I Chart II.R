@@ -126,7 +126,7 @@ I_Chart <- function(
 
     # a) Look for 2 points below the Lower Limit
     IChart_Data <- IChart_Data %>%
-      mutate(SC_a = if_else(Days_N > i & Days_N <=j & Days_N >= i+Lim_Min-1 & Dot < LL & LL > 0, 1,0),
+      mutate(SC_a = if_else(Days_N > i & Days_N <=j & Days_N >= i+Lim_Min-1 & Dot < LL, 1,0),
         SC_ax = SC_a + lag(SC_a))
     IChart_Data$SC_ax[is.na(IChart_Data$SC_ax)] <- 0
     Days_Pa <- min(IChart_Data$Days_N[IChart_Data$SC_ax==2]) - 1
@@ -140,7 +140,7 @@ I_Chart <- function(
 
     # c) Look for 2 points above the Upper Limit
     IChart_Data <- IChart_Data %>%
-      mutate(SC_c = if_else(Days_N > i & Days_N <=j & Days_N >= i+Lim_Min-1 & Dot > UL & UL > 0, 1,0),
+      mutate(SC_c = if_else(Days_N > i & Days_N <=j & Days_N >= i+Lim_Min-1 & Dot > UL, 1,0),
         SC_cx = SC_c + lag(SC_c) )
     IChart_Data$SC_cx[is.na(IChart_Data$SC_cx)] <- 0
     Days_Pc <- min(IChart_Data$Days_N[IChart_Data$SC_cx==2]) - 1
